@@ -1,0 +1,547 @@
+﻿<UserControl x:Class="SIPAM.ManagePage.GroupManage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SIPAM.ManagePage"
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:Background="AliceBlue"
+             FontSize="20"
+             d:DesignHeight="1000" d:DesignWidth="1600"
+             d:VerticalAlignment="Stretch" 
+             SizeChanged="UserControl_SizeChanged"
+             Loaded="GroupManage_OnLoaded"
+             >
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="300*"/>
+        </Grid.ColumnDefinitions>
+
+        <!--纵向分隔条-->
+        <DockPanel
+            
+            Grid.Row="0"
+            HorizontalAlignment="Right"
+            >
+
+            <ProgressBar
+               x:Name="YLine"
+               Orientation="Vertical"
+               Height="3"
+               IsIndeterminate="False" 
+
+               />
+
+
+        </DockPanel>
+
+        <!--纵向分隔条2-->
+        <DockPanel
+            
+            Grid.Column="1"
+            HorizontalAlignment="Right"
+            >
+
+            <ProgressBar
+               x:Name="YLine2"
+               Orientation="Vertical"
+               Height="3"
+               IsIndeterminate="False" 
+
+               />
+
+
+        </DockPanel>
+
+        <!--纵向分隔条2-->
+        <DockPanel
+            
+            Grid.Column="2"
+            HorizontalAlignment="Right"
+        >
+
+            <ProgressBar
+                x:Name="YLine3"
+                Orientation="Vertical"
+                Height="3"
+                IsIndeterminate="False" 
+
+            />
+
+
+        </DockPanel>
+
+        <!--用户组列表-->
+
+        <StackPanel
+            Grid.Column="1"
+            Margin="0"
+            >
+
+            <GroupBox
+                    Header="群组用户列表"
+                    BorderThickness="0"
+                    Foreground="Teal"
+                    Margin="0">
+                <ListView
+                    x:Name="UserListView"
+                    ItemsSource="{Binding PeopleItems}" 
+                    d:ItemsSource="{d:SampleData ItemCount=5}" 
+                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                    ScrollViewer.VerticalScrollBarVisibility="Auto"
+                    >
+                    <ListView.View>
+                        <GridView>
+
+                            <GridViewColumn
+                                 DisplayMemberBinding="{Binding Name}"
+                                 >
+                                <StackPanel
+                                    Orientation="Horizontal"
+                                    HorizontalAlignment="Left"
+                                    >
+                                    <md:PackIcon Kind="People" VerticalAlignment="Center"/>
+                                    <Label Content="姓名"/>
+
+                                </StackPanel>
+                            </GridViewColumn>
+
+                            <GridViewColumn
+                                DisplayMemberBinding="{Binding Department}"
+                            >
+                                <StackPanel
+                                    Orientation="Horizontal"
+                                    HorizontalAlignment="Left"
+                                >
+                                    <md:PackIcon Kind="House" VerticalAlignment="Center"/>
+                                    <Label Content="部门"/>
+
+                                </StackPanel>
+                            </GridViewColumn>
+
+                            <GridViewColumn
+                                 DisplayMemberBinding="{Binding Phone}"
+                                 >
+                                <StackPanel
+                                    Orientation="Horizontal"
+                                    HorizontalAlignment="Left"
+                                    >
+                                    <md:PackIcon Kind="Telephone" VerticalAlignment="Center"/>
+                                    <Label Content="联系电话"/>
+
+                                </StackPanel>
+                            </GridViewColumn>
+
+
+
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+            </GroupBox>
+
+
+
+
+
+        </StackPanel>
+
+
+
+        <!--用户组信息管理-->
+        <StackPanel 
+            Grid.Column="0"
+            Margin="0"
+            >
+            <GroupBox
+                    Header="用户组配置"  
+                    BorderThickness="0"
+                    Foreground="Teal"
+                    Margin="0">
+                <StackPanel Margin="0" VerticalAlignment="Top">
+
+
+                    <TextBox
+                        x:Name="GroupTextBox"
+                        Margin="0,5,0,5"
+                        Text=""
+                        VerticalAlignment="Top"
+                        md:HintAssist.Hint="{DynamicResource ManageGroupName}"
+                        AcceptsReturn="True"
+                        IsEnabled="False"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                        TextWrapping="NoWrap" />
+
+                    <TextBox
+                        x:Name="DescriptionTextBox"  
+                        Margin="0,5,0,5"
+                        Text=""
+                        IsEnabled="False"
+                        VerticalAlignment="Top"
+                        md:HintAssist.Hint="{DynamicResource ManageGroupNote}"
+                        AcceptsReturn="True"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                        TextWrapping="Wrap" />
+
+
+                    <Grid 
+                        Margin="0"
+                    >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+
+                        </Grid.RowDefinitions>
+                        
+                        <Grid
+                            Grid.Row="0"
+                            >
+                            <Grid.ColumnDefinitions >
+                                <ColumnDefinition Width="50*"/>
+                                <ColumnDefinition Width="50*"/>
+
+                            </Grid.ColumnDefinitions>
+
+                            <Button
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Margin="0,5,0,5"
+                                x:Name="AddButton"
+                                Style="{StaticResource MaterialDesignOutlinedButton}"
+                                Click="AddButton_OnClick"
+                            >
+
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <md:PackIcon Kind="AddBox" VerticalAlignment="Center"/>
+                                    <Label Content="添加群组" />
+                                </StackPanel>
+
+                            </Button>
+
+
+                            <Button
+                                Grid.Column="1"
+                                Margin="5,5,0,5"
+                                x:Name="EditButton"
+                                Style="{StaticResource MaterialDesignOutlinedButton}"
+                                Click="EditButton_OnClick"
+                                IsEnabled="False"
+                                >
+
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <md:PackIcon Kind="EditBox" VerticalAlignment="Center"/>
+                                    <Label Content="编辑群组" />
+                                </StackPanel>
+
+                            </Button>
+
+                        </Grid>
+
+
+                        <Grid
+                            Grid.Row="1"
+                        >
+                            <Grid.ColumnDefinitions >
+                                <ColumnDefinition Width="50*"/>
+                                <ColumnDefinition Width="50*"/>
+
+                            </Grid.ColumnDefinitions>
+
+                            <Button
+                                Grid.Column="0"
+                                Margin="0,5,0,5"
+                                x:Name="CancelButton"
+                                Style="{StaticResource MaterialDesignOutlinedButton}"
+                                Click="CancelButton_OnClick"
+                                IsEnabled="False"
+                            >
+
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <md:PackIcon Kind="Backspace" VerticalAlignment="Center"/>
+                                    <Label Content="取消" />
+                                </StackPanel>
+
+                            </Button>
+
+                            <Button
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                Margin="5,5,0,5"
+                                x:Name="SaveButton"
+                                Style="{StaticResource MaterialDesignOutlinedButton}"
+                                Click="SaveButton_OnClick"
+                                IsEnabled="False"
+                                
+                            >
+
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <md:PackIcon Kind="ContentSave" VerticalAlignment="Center"/>
+                                    <Label x:Name="SaveLabel" Content="保存" />
+                                </StackPanel>
+
+                            </Button>
+
+
+
+
+
+                        </Grid>
+
+                    </Grid>
+
+
+
+                </StackPanel>
+
+
+            </GroupBox>
+
+
+
+            <GroupBox
+                    Header="群组列表"  
+                    BorderThickness="0"
+                    Foreground="Teal"
+                    Margin="0">
+
+                <ListView
+                    Margin="0"
+                    x:Name="GroupListView"
+                    BorderThickness="0"
+                    SelectionChanged="GroupListView_SelectionChanged"
+                    HorizontalAlignment="Center"
+                    ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+                    ScrollViewer.VerticalScrollBarVisibility="Auto"
+                    d:ItemsSource="{d:SampleData ItemCount=10}" >
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn
+                                DisplayMemberBinding="{Binding Id}"
+                                >
+
+                                <StackPanel
+                                    Orientation="Horizontal"
+                                    HorizontalAlignment="Left" 
+                                    >
+                                    <md:PackIcon Kind="Number0Box" VerticalAlignment="Center"/>
+                                    <Label Content="{DynamicResource ManageGroupIndex}"/>
+                                </StackPanel>
+
+                            </GridViewColumn>
+
+
+
+
+
+                            <GridViewColumn
+                                DisplayMemberBinding="{Binding GroupName}"
+                
+                                >
+
+                                <StackPanel
+                                    Orientation="Horizontal"
+                                    HorizontalAlignment="Left"
+                                    >
+                                    <md:PackIcon Kind="PeopleGroup" VerticalAlignment="Center"/>
+                                    <Label Content="{DynamicResource ManageGroupName}"/>
+
+                                </StackPanel>
+
+
+                            </GridViewColumn>
+
+                            <GridViewColumn
+                                DisplayMemberBinding="{Binding Description}"
+                      
+                                >
+                                <StackPanel
+                                    Orientation="Horizontal"
+                                    HorizontalAlignment="Left"
+                                    >
+                                    <md:PackIcon Kind="Note" VerticalAlignment="Center"/>
+                                    <Label Content="{DynamicResource ManageGroupDescription}"/>
+
+                                </StackPanel>
+
+
+                            </GridViewColumn>
+
+
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+
+
+
+
+            </GroupBox>
+
+
+
+
+
+
+        </StackPanel>
+
+
+        <GroupBox 
+            Grid.Column="2"
+               Header="用户组已分配网段"  
+               BorderThickness="0"
+               
+               >
+
+            <ListView
+                 x:Name="SegmentListView" 
+                 d:ItemsSource="{d:SampleData ItemCount=5}"
+                 ScrollViewer.VerticalScrollBarVisibility="Auto"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                 SelectionChanged="SegmentListView_OnSelectionChanged"
+                 >
+                <ListView.View>
+                    <GridView>
+
+
+
+                        <GridViewColumn
+                                 DisplayMemberBinding="{Binding Network}"
+                                 >
+                            <StackPanel
+                                    Orientation="Horizontal"
+                                    HorizontalAlignment="Left"
+                                    >
+                                <md:PackIcon Kind="IpNetwork" VerticalAlignment="Center"/>
+                                <Label Content="网段"/>
+
+                            </StackPanel>
+                        </GridViewColumn>
+
+                        <GridViewColumn
+                                 DisplayMemberBinding="{Binding Netmask}"
+                                 >
+                            <StackPanel
+                                    Orientation="Horizontal"
+                                    HorizontalAlignment="Left"
+                                    >
+                                <md:PackIcon Kind="Numbers" VerticalAlignment="Center"/>
+                                <Label Content="子网掩码"/>
+
+                            </StackPanel>
+                        </GridViewColumn>
+
+
+
+                        <GridViewColumn
+                                 DisplayMemberBinding="{Binding Description}"
+                                 >
+                            <StackPanel
+                                    Orientation="Horizontal"
+                                    HorizontalAlignment="Left"
+                                    >
+                                <md:PackIcon Kind="Notebook" VerticalAlignment="Center"/>
+                                <Label Content="网段说明"/>
+
+                            </StackPanel>
+                        </GridViewColumn>
+
+
+
+                       
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+
+
+
+        </GroupBox>
+
+
+
+        <!--图形化-->
+        <Grid
+             Grid.Column="3"
+             HorizontalAlignment="Stretch"
+             >
+
+            <GroupBox 
+                Header="群组可分配网段"  
+                BorderThickness="0"
+        
+                >
+                <ListView
+                 x:Name="SegmentListViewUn" 
+                 d:ItemsSource="{d:SampleData ItemCount=5}"
+                 SelectionChanged="SegmentListViewUn_OnSelectionChanged"
+                 ScrollViewer.VerticalScrollBarVisibility="Auto"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                 >
+                    <ListView.View>
+                        <GridView>
+
+
+
+                            <GridViewColumn
+                                 DisplayMemberBinding="{Binding Network}"
+                                 >
+                                <StackPanel
+                                    Orientation="Horizontal"
+                                    HorizontalAlignment="Left"
+                                    >
+                                    <md:PackIcon Kind="IpNetwork" VerticalAlignment="Center"/>
+                                    <Label Content="网段"/>
+
+                                </StackPanel>
+                            </GridViewColumn>
+
+                            <GridViewColumn
+                                 DisplayMemberBinding="{Binding Netmask}"
+                                 >
+                                <StackPanel
+                                    Orientation="Horizontal"
+                                    HorizontalAlignment="Left"
+                                    >
+                                    <md:PackIcon Kind="Numbers" VerticalAlignment="Center"/>
+                                    <Label Content="子网掩码"/>
+
+                                </StackPanel>
+                            </GridViewColumn>
+
+
+
+                            <GridViewColumn
+                                 DisplayMemberBinding="{Binding Description}"
+                                 >
+                                <StackPanel
+                                    Orientation="Horizontal"
+                                    HorizontalAlignment="Left"
+                                    >
+                                    <md:PackIcon Kind="Notebook" VerticalAlignment="Center"/>
+                                    <Label Content="网段说明"/>
+
+                                </StackPanel>
+                            </GridViewColumn>
+
+
+
+
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+
+            </GroupBox>
+
+
+        </Grid>
+
+
+
+
+    </Grid>
+</UserControl>

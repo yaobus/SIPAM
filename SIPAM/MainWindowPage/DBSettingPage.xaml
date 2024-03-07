@@ -1,0 +1,122 @@
+﻿<UserControl x:Class="SIPAM.MainWindowPage.DBSettingPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SIPAM.MainWindowPage"
+             mc:Ignorable="d" 
+             d:Background="AliceBlue"
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             d:DesignHeight="360" 
+             d:DesignWidth="600"
+             
+             Loaded="DBSettingPage_OnLoaded"
+             >
+    <md:TransitioningContent  OpeningEffect="{md:TransitionEffect SlideInFromBottom, Duration=0:0:0.2}">
+        <Grid Margin="30">
+            <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
+
+                <TextBox
+                    Width="400"   
+                    Margin="5"
+                    x:Name="DbHost"
+                    Text=""
+                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                    VerticalAlignment="Top"
+                    AcceptsReturn="False"
+                    TextWrapping="NoWrap"
+                    VerticalScrollBarVisibility="Auto"
+                    md:HintAssist.Hint="{DynamicResource DbHost}"
+                    TextChanged="DbHost_OnTextChanged"
+                    />
+
+                <StackPanel Orientation="Horizontal">
+
+                    <TextBox
+                        Width="195"   
+                        Margin="5,5"
+                        x:Name="DbPort"
+                        Text=""
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                        VerticalAlignment="Top"
+                        AcceptsReturn="False"
+                        TextWrapping="NoWrap"
+                        VerticalScrollBarVisibility="Auto"
+                        md:HintAssist.Hint="{DynamicResource DbPort}"
+                        TextChanged="DbPort_OnTextChanged"
+                    />
+
+                    <TextBox
+                        Width="195"   
+                        Margin="5,5"
+                        x:Name="DbName"
+                        Text=""
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                        VerticalAlignment="Top"
+                        AcceptsReturn="False"
+                        TextWrapping="NoWrap"
+                        VerticalScrollBarVisibility="Auto"
+                        md:HintAssist.Hint="{DynamicResource DbName}"
+                        TextChanged="DbName_OnTextChanged"
+                    />
+
+
+
+                </StackPanel>
+
+
+
+                <TextBox
+                    Width="400"   
+                    Margin="5"
+                    x:Name="DbUser"
+                    Text=""
+                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                    VerticalAlignment="Top"
+                    AcceptsReturn="False"
+                    TextWrapping="NoWrap"
+                    VerticalScrollBarVisibility="Auto"
+                    md:HintAssist.Hint="{DynamicResource DbUser}"
+                    TextChanged="DbUser_OnTextChanged"
+                    />
+
+                <PasswordBox
+                    Margin="5"
+                    x:Name="DbPassword"
+                    Style="{StaticResource MaterialDesignOutlinedPasswordBox}"
+                    VerticalAlignment="Top"
+                    Password=""
+                    md:HintAssist.Hint="{DynamicResource DbPassword}" 
+                    PasswordChanged="DbPassword_OnPasswordChanged"
+                    />
+
+                <Button
+                    x:Name="InitializationButton"
+                    Margin="5"
+                    Height="50"
+                    Style="{StaticResource MaterialDesignOutlinedButton}"
+                    ToolTip="点击创建初始表单" 
+                    Click="InitializationButton_OnClick"
+                >
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" >
+                        <md:PackIcon Margin="0,0,10,0" Kind="TableCheck"  Width="20" Height="30"></md:PackIcon>
+                        <TextBlock Text="初始化表单" VerticalAlignment="Center" Style="{DynamicResource MaterialDesignBody1TextBlock}"/>
+                        
+
+                    </StackPanel>
+
+
+                </Button>
+
+
+
+
+            </StackPanel>
+
+
+            
+
+
+        </Grid>
+    </md:TransitioningContent>
+</UserControl>

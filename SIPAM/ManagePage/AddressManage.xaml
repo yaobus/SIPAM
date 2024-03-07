@@ -1,0 +1,587 @@
+﻿<UserControl x:Class="SIPAM.ManagePage.AddressManage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SIPAM.ManagePage"
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:Background="AliceBlue"
+             FontSize="20"
+             d:DesignHeight="1000" d:DesignWidth="1400"
+             d:VerticalAlignment="Stretch" 
+             SizeChanged="UserControl_SizeChanged"
+             Loaded="AddressManage_OnLoaded"
+             >
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!--纵向分隔条-->
+        <DockPanel
+            
+            Grid.Row="0"
+            HorizontalAlignment="Right"
+            >
+
+            <ProgressBar
+               x:Name="YLine"
+               Orientation="Vertical"
+               Height="3"
+               IsIndeterminate="False" 
+
+               />
+
+
+        </DockPanel>
+
+        <!--纵向分隔条2-->
+        <DockPanel
+            
+            Grid.Column="1"
+            HorizontalAlignment="Right"
+            >
+
+            <ProgressBar
+               x:Name="YLine2"
+               Orientation="Vertical"
+               Height="3"
+               IsIndeterminate="False" 
+
+               />
+
+
+        </DockPanel>
+
+        <!--地址列表-->
+       
+        <StackPanel
+            Grid.Column="1"
+            Margin="0"
+            >
+
+            <GroupBox
+                    Header="IP网段列表"
+                    BorderThickness="0"
+                    Foreground="Teal"
+                    Margin="0">
+                <ListView
+                    Margin="0"
+                    x:Name="AddressListView"
+                    BorderThickness="0"
+                    SelectionChanged="AddressListView_SelectionChanged"
+                    HorizontalAlignment="Stretch"
+                    
+                    ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+                    >
+                    <ListView.View>
+                        <GridView>
+
+                            <GridViewColumn
+                                DisplayMemberBinding="{Binding Network}"
+                
+                                >
+
+                                <StackPanel
+                                    Orientation="Horizontal"
+                                    HorizontalAlignment="Left"
+                                    >
+                                    <md:PackIcon Kind="Ip" VerticalAlignment="Center"/>
+                                    <Label Content="{DynamicResource ManageIPList}"/>
+
+                                </StackPanel>
+
+
+                            </GridViewColumn>
+
+                            <GridViewColumn
+                                DisplayMemberBinding="{Binding Netmask}"
+                      
+                                >
+                                <StackPanel
+                                    Orientation="Horizontal"
+                                    HorizontalAlignment="Left"
+                                    >
+                                    <md:PackIcon Kind="Numbers"  VerticalAlignment="Center"/>
+                                    <Label Content="{DynamicResource ManageIPNetmask}"/>
+
+                                </StackPanel>
+
+
+                            </GridViewColumn>
+
+
+
+                            <GridViewColumn
+                                DisplayMemberBinding="{Binding Description}"
+                      
+                                >
+                                <StackPanel
+                                    Orientation="Horizontal"
+                                    HorizontalAlignment="Left"
+                                    >
+                                    <md:PackIcon Kind="Design" VerticalAlignment="Center"/>
+                                    <Label Content="{DynamicResource ManageIPDescription}"/>
+
+                                </StackPanel>
+
+
+                            </GridViewColumn>
+
+
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+            </GroupBox>
+
+
+            
+
+
+        </StackPanel>
+
+
+
+        <!--地址管理-->
+        <StackPanel 
+            Grid.Column="0"
+            Margin="0"
+            >
+            <GroupBox
+                    Header="IP网段配置"  
+                    BorderThickness="0"
+                    Foreground="Teal"
+                    Margin="0">
+                <StackPanel Margin="0" VerticalAlignment="Top">
+
+
+                    <TextBox
+                        x:Name="IpTextBox"
+                        Margin="0,5,0,5"
+                        Text="192.168.0.1"
+                        VerticalAlignment="Top"
+                        md:HintAssist.Hint="{DynamicResource ManageIPAddress}"
+                        AcceptsReturn="True"
+                        IsEnabled="False"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                        TextChanged="IpTextBox_OnTextChanged"
+                        TextWrapping="NoWrap" />
+
+                    <TextBox
+                        x:Name="MaskText"  
+                        Margin="0,5,0,5"
+                        Text="255.255.255.0"
+
+                        VerticalAlignment="Top"
+                        md:HintAssist.Hint="{DynamicResource ManageIPNetmask}"
+                        AcceptsReturn="True"
+                        IsEnabled="False"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                        TextWrapping="NoWrap" />
+
+                    <TextBox
+                            
+                        x:Name="NumBox" 
+                        Margin="0,5,0,5"
+                        Text="256"
+                        IsEnabled="False"
+                        VerticalAlignment="Top"
+                        md:HintAssist.Hint="{DynamicResource ManageIPNumber}"
+                        AcceptsReturn="True"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                        TextWrapping="NoWrap" />
+
+
+
+
+
+                </StackPanel>
+
+
+            </GroupBox>
+
+
+
+            <GroupBox
+                    Header="掩码位调整"  
+                    BorderThickness="0"
+                    Foreground="Teal"
+                    Margin="0">
+                <Slider
+                    Margin="0,0,0,5"
+                    x:Name="MaskSlider"
+                    Minimum="24"
+                    Maximum="30"
+                    IsEnabled="False"
+                    Style="{StaticResource MaterialDesignDiscreteSlider}"
+                    TickFrequency="{Binding DiscreteHorizontal.TickFrequency}"
+                    TickPlacement="Both"  
+                    ValueChanged="MaskSlider_ValueChanged" />
+
+            </GroupBox>
+
+            <GroupBox Header="网段注意事项"  BorderThickness="0">
+
+                <StackPanel>
+
+                    <TextBox
+                        x:Name="TbAttention"
+                        Margin="0,5,0,5"
+                        VerticalAlignment="Top"
+                        Height="200"
+                        md:HintAssist.Hint="注意事项:"
+                        AcceptsReturn="True"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                        IsEnabled="False"
+                        TextWrapping="Wrap" />
+
+
+
+
+                </StackPanel>
+                
+
+            </GroupBox>
+
+            <GroupBox
+                        Margin="0"
+                        BorderThickness="0"
+                        Header="IP地址保留设置">
+
+                
+                
+                <StackPanel Margin="0" Orientation="Vertical">
+
+                    <Grid
+                        Margin="0,0,0,5"
+                        >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="30*"/>
+                            <ColumnDefinition Width="30*"/>
+                            <ColumnDefinition Width="30*"/>
+                        </Grid.ColumnDefinitions>
+
+
+                            <CheckBox
+                            x:Name="LockBoxFirst"
+                            Grid.Column="0"
+                            Content="首IP"
+                            HorizontalAlignment="Stretch"
+                            IsChecked="True"
+                            IsEnabled="False"
+                            Click="LockBoxFirst_OnClick"
+                            Style="{StaticResource MaterialDesignFilterChipCheckBox}" />
+
+
+
+                            <CheckBox
+                            x:Name="LockBoxLast"
+                            Grid.Column="1"
+                            Content="尾IP"
+                            HorizontalAlignment="Stretch"
+                            IsChecked="True"
+                            IsEnabled="False"
+                            Click="LockBoxLast_OnClick"
+                            Style="{StaticResource MaterialDesignFilterChipCheckBox}" />
+
+                            <CheckBox
+                            x:Name="LockBoxOther"
+                            Grid.Column="2"  
+                            Content="其他IP"
+                            HorizontalAlignment="Stretch"
+                            IsEnabled="False"
+                            IsChecked="False"
+                            Click="LockBoxOther_OnClick"
+                            Style="{StaticResource MaterialDesignFilterChipCheckBox}" />
+
+
+
+                    </Grid>
+
+
+                    <TextBox
+                        x:Name="LockedIp"
+                        Margin="0,5,0,5"
+                        VerticalAlignment="Top"
+                        md:HintAssist.Hint="要锁定的其他IP(用,分隔)"
+                        AcceptsReturn="True"
+                        IsEnabled="False"
+                        Text="2,3,4,5,6,7,8,9"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                        TextWrapping="NoWrap" 
+                        TextChanged="LockedIp_OnTextChanged"
+                        />
+
+
+                    <TextBox
+                        x:Name="IpDescription"
+                        Margin="0,5,0,5"
+                        VerticalAlignment="Top"
+                        md:HintAssist.Hint="网段用途说明"
+                        AcceptsReturn="True"
+                        Text="TEST"
+                        IsEnabled="False"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                        TextWrapping="NoWrap" />
+
+
+                </StackPanel>
+
+
+
+
+            </GroupBox>
+
+
+            <Grid 
+                Margin="5"
+                >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50*"/>
+                    <ColumnDefinition Width="50*"/>
+
+
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+
+                <Button
+                    Grid.Column="0"
+                      Margin="5"
+                      x:Name="GraphicsButton"
+                    IsEnabled="False"
+                      Style="{StaticResource MaterialDesignOutlinedButton}"
+                      Click="GraphicsButton_OnClick">
+                   
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <md:PackIcon Kind="GraphAreaspline" VerticalAlignment="Center"/>
+                        <Label Content="图形化显示" />
+
+                    </StackPanel>
+                    
+                    
+                    
+                </Button>
+
+
+
+
+
+                <Button
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Margin="5,0"
+                    x:Name="AddButton"
+                    Style="{StaticResource MaterialDesignOutlinedButton}"
+                    Click="AddButton_OnClick"
+                    >
+
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <md:PackIcon Kind="AddBox" VerticalAlignment="Center"/>
+                        <Label Content="添加网段" />
+                    </StackPanel>
+
+                </Button>
+
+                <Button
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Grid.Row="1"
+                    Margin="5"
+                    x:Name="SaveButton"
+                    Visibility="Hidden"
+                    d:Visibility="Visible"
+                    Style="{StaticResource MaterialDesignOutlinedButton}"
+                    Click="SaveButton_OnClick"
+                    >
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <md:PackIcon Kind="ContentSave" VerticalAlignment="Center"/>
+                        <Label Content="保存网段" />
+                    </StackPanel>
+
+                </Button>
+            </Grid>
+            
+            
+
+            
+            
+            
+            
+            
+
+
+        </StackPanel>
+
+        
+
+
+
+        <!--图形化-->
+        <Grid
+            Grid.Column="2"
+            HorizontalAlignment="Stretch"
+            >
+
+            <GroupBox 
+               Header="当前子网信息图示"  
+               BorderThickness="0"
+               
+               >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="63"/>
+                        <RowDefinition Height="*"/>
+
+                    </Grid.RowDefinitions>
+
+                    <!--横向分隔条1-->
+                    <StackPanel
+                        Grid.Row="0"
+                        Margin="-9,0"
+                        VerticalAlignment="Bottom"
+                        >
+
+                        <ProgressBar
+                            Height="3"
+                            IsIndeterminate="False" />
+
+                    </StackPanel>
+
+
+
+                    <!--样式参考区域-->
+                    <StackPanel
+                        Grid.Row="0"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Stretch"
+                        >
+
+                        <Grid
+                            Margin="5"
+                             >
+                            <Button
+                                Style="{StaticResource MaterialDesignRaisedLightButton}"
+                                Background="DimGray"
+                                Foreground="AliceBlue"
+                                md:ButtonAssist.CornerRadius="3"
+                                BorderThickness="0"
+                                >
+                                <TextBlock
+                                Text="网段地址" />
+                            </Button>
+                        </Grid>
+
+                        <Grid
+                            Margin="5"
+                             >
+                            <Button
+                                Style="{StaticResource MaterialDesignRaisedLightButton}"
+                                Background="DarkCyan"
+                                Foreground="AliceBlue"
+                                md:ButtonAssist.CornerRadius="3"
+                                BorderThickness="0"
+                                >
+                                <TextBlock
+                                Text="保留地址" />
+                            </Button>
+                        </Grid>
+
+                        <Grid
+                            Margin="5"
+                             >
+                            <Button
+                                Style="{StaticResource MaterialDesignRaisedLightButton}"
+                                Background="LimeGreen"
+                                Foreground="AliceBlue"
+                                md:ButtonAssist.CornerRadius="3"
+                                BorderThickness="0"
+                                >
+                                <TextBlock
+                                Text="可用地址" />
+                            </Button>
+                        </Grid>
+
+                        <Grid
+                            Margin="5"
+                             >
+                            <Button
+                                Style="{StaticResource MaterialDesignRaisedLightButton}"
+                                Background="DarkOrange"
+                                Foreground="AliceBlue"
+                                md:ButtonAssist.CornerRadius="3"
+                                BorderThickness="0"
+                                >
+                                <TextBlock
+                                Text="锁定地址" />
+                            </Button>
+                        </Grid>
+
+                        <Grid
+                            Margin="5"
+                             >
+                            <Button
+                                Style="{StaticResource MaterialDesignRaisedLightButton}"
+                                Background="OrangeRed"
+                                Foreground="AliceBlue"
+                                md:ButtonAssist.CornerRadius="3"
+                                BorderThickness="0"
+                                >
+                                <TextBlock
+                                Text="已用地址" />
+                            </Button>
+                        </Grid>
+
+                        <Grid
+                            Margin="5"
+                             >
+                            <Button
+                                Style="{StaticResource MaterialDesignRaisedLightButton}"
+                                Background="LightSlateGray"
+                                Foreground="AliceBlue"
+                                md:ButtonAssist.CornerRadius="3"
+                                BorderThickness="0"
+                                >
+                                <TextBlock
+                                Text="广播地址" />
+                            </Button>
+                        </Grid>
+                       
+                    </StackPanel>
+
+
+
+
+
+                    <!--图形化区域-->
+                    <WrapPanel
+                        x:Name="GraphicsPlan"
+                        Grid.Row="1"
+                        Margin="0"
+                        
+                        >
+
+
+                    </WrapPanel>
+
+
+                </Grid>
+
+            </GroupBox>
+
+
+        </Grid>
+
+
+
+
+
+    </Grid>
+</UserControl>

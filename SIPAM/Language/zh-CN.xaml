@@ -1,0 +1,69 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:s="clr-namespace:System;assembly=mscorlib">
+
+
+
+    <!--登录页面-->
+    <s:String x:Key="LoginTitle">简单IP地址分配记录管理系统</s:String>
+
+    <s:String x:Key="DbHost">数据库主机：</s:String>
+    <s:String x:Key="DbPort">数据库端口：</s:String>
+    <s:String x:Key="DbUser">数据库用户：</s:String>
+    <s:String x:Key="DbPassword">数据库密码：</s:String>
+    <s:String x:Key="DbName">数据库名称：</s:String>
+
+
+    <s:String x:Key="LoginUM">用户名</s:String>
+    <s:String x:Key="LoginPW">密码</s:String>
+
+    <s:String x:Key="LoginLogin">登录</s:String>
+    <s:String x:Key="Register">注册</s:String>
+
+
+
+    <!--管理员页面-->
+    
+    <s:String x:Key="ManageTitle">管理员页面</s:String>
+    <s:String x:Key="ManageMenuApprove">申请审批</s:String>
+    <s:String x:Key="ManageMenuIP">网段管理</s:String>
+    <s:String x:Key="ManageMenuOrganization">字典管理</s:String>
+    <s:String x:Key="ManageMenuGroup">群组管理</s:String>
+    <s:String x:Key="ManageMenuUser">用户管理</s:String>
+    <s:String x:Key="ManageMenuAllocation">地址分配</s:String>
+
+
+    <!--管理员地址管理页面-->
+    <s:String x:Key="ManageIndex">序号</s:String>
+    <s:String x:Key="ManageIPList">网段</s:String>
+
+    <s:String x:Key="ManageIPDescription">说明</s:String>
+
+    <s:String x:Key="ManageIPAddress">IP地址段</s:String>
+    <s:String x:Key="ManageIPNetmask">子网掩码</s:String>
+    <s:String x:Key="ManageIPNumber">子网IP地址数量</s:String>
+
+    <!--管理员群组管理页面-->
+    <s:String x:Key="ManageGroupIndex">序号</s:String>
+    <s:String x:Key="ManageGroupName">用户群组</s:String>
+    <s:String x:Key="ManageGroupDescription">说明</s:String>
+
+    <s:String x:Key="ManageGroupNote">用户组描述</s:String>
+
+
+    <!--管理员部门管理页面-->
+    <s:String x:Key="ManageOrgIndex">序号</s:String>
+    <s:String x:Key="ManageOrgName">部门名称</s:String>
+    <s:String x:Key="ManageOrgDescription">说明</s:String>
+
+    <s:String x:Key="ManageOrgNote">部门描述</s:String>
+
+    <!--管理员用户管理页面-->
+    <s:String x:Key="ManageUserIndex">序号</s:String>
+    <s:String x:Key="ManageUserName">用户名称</s:String>
+    <s:String x:Key="ManageUserTel">联系电话</s:String>
+
+    <s:String x:Key="ManageUserNote">手机号码</s:String>
+    <s:String x:Key="ManageUserStatus">用户状态</s:String>
+
+</ResourceDictionary>

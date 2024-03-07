@@ -1,0 +1,280 @@
+﻿<UserControl x:Class="SIPAM.ManagePage.Organization"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SIPAM.ManagePage"
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:Background="AliceBlue"
+             FontSize="20"
+             d:DesignHeight="1000" d:DesignWidth="1600"
+             d:VerticalAlignment="Stretch" 
+             SizeChanged="UserControl_SizeChanged"
+             Loaded="Organization_OnLoaded"
+             >
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="300*"/>
+        </Grid.ColumnDefinitions>
+
+        <!--纵向分隔条-->
+        <DockPanel
+            
+            Grid.Row="0"
+            HorizontalAlignment="Right"
+            >
+
+            <ProgressBar
+               x:Name="YLine"
+               Orientation="Vertical"
+               Height="3"
+               IsIndeterminate="False" 
+
+               />
+
+
+        </DockPanel>
+
+
+        <!--纵向分隔条2-->
+        <DockPanel
+            
+            Grid.Column="1"
+            HorizontalAlignment="Right"
+            >
+
+            <ProgressBar
+               x:Name="YLine2"
+               Orientation="Vertical"
+               Height="3"
+               IsIndeterminate="False" 
+
+               />
+
+
+        </DockPanel>
+
+
+        <!--组织机构列表-->
+
+        <StackPanel
+            Grid.Column="1"
+            Margin="0"
+            >
+
+            <GroupBox
+                    Header="部门列表"
+                    BorderThickness="0"
+                    Foreground="Teal"
+                    Margin="0">
+                <ListView
+                    Margin="0"
+                    x:Name="OrgListView"
+                    BorderThickness="0"
+                    SelectionChanged="OrgListView_SelectionChanged"
+                    HorizontalAlignment="Center"
+                    ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+                    d:ItemsSource="{d:SampleData ItemCount=10}" >
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn
+                                DisplayMemberBinding="{Binding Id}"
+                                >
+
+                                <StackPanel
+                                    Orientation="Horizontal"
+                                    HorizontalAlignment="Left" 
+                                    >
+                                    <md:PackIcon Kind="Number0Box" VerticalAlignment="Center"/>
+                                    <Label Content="{DynamicResource ManageOrgIndex}"/>
+                                </StackPanel>
+
+                            </GridViewColumn>
+
+
+
+
+
+                            <GridViewColumn
+                                DisplayMemberBinding="{Binding Department}"
+                
+                                >
+
+                                <StackPanel
+                                    Orientation="Horizontal"
+                                    HorizontalAlignment="Left"
+                                    >
+                                    <md:PackIcon Kind="NaturePeople" VerticalAlignment="Center"/>
+                                    <Label Content="{DynamicResource ManageOrgName}"/>
+
+                                </StackPanel>
+
+
+                            </GridViewColumn>
+
+                            <GridViewColumn
+                                DisplayMemberBinding="{Binding Description}"
+                      
+                                >
+                                <StackPanel
+                                    Orientation="Horizontal"
+                                    HorizontalAlignment="Left"
+                                    >
+                                    <md:PackIcon Kind="Note" VerticalAlignment="Center"/>
+                                    <Label Content="{DynamicResource ManageGroupDescription}"/>
+
+                                </StackPanel>
+
+
+                            </GridViewColumn>
+
+
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+            </GroupBox>
+
+
+
+
+
+        </StackPanel>
+
+
+        <!--部门信息管理-->
+        <StackPanel 
+            Grid.Column="0"
+            Margin="0"
+            >
+            <GroupBox
+                    Header="部门信息管理"  
+                    BorderThickness="0"
+                    Foreground="Teal"
+                    Margin="0">
+                <StackPanel Margin="0" VerticalAlignment="Top">
+
+
+                    <TextBox
+                        x:Name="GroupTextBox"
+                        Margin="0,5,0,5"
+                        Text=""
+                        VerticalAlignment="Top"
+                        md:HintAssist.Hint="{DynamicResource ManageOrgName}"
+                        AcceptsReturn="True"
+                        IsEnabled="False"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                        TextWrapping="NoWrap" />
+
+                    <TextBox
+                        x:Name="DescriptionText"  
+                        Margin="0,5,0,5"
+                        Text=""
+                        Height="300"
+                        IsEnabled="False"
+                        VerticalAlignment="Top"
+                        md:HintAssist.Hint="{DynamicResource ManageOrgNote}"
+                        AcceptsReturn="True"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                        TextWrapping="Wrap" />
+
+
+
+
+
+
+                </StackPanel>
+
+
+            </GroupBox>
+
+
+
+
+
+
+
+
+            <Grid 
+                Margin="5" Cursor=""
+                >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+
+                </Grid.RowDefinitions>
+                <Button
+                    x:Name="AddButton"
+                    Grid.Row="0"
+                    Margin="5"
+                    
+                    Style="{StaticResource MaterialDesignOutlinedButton}"
+                    Click="AddButton_OnClick"
+                    >
+
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <md:PackIcon Kind="AddBox" VerticalAlignment="Center"/>
+                        <Label Content="添加部门" />
+                    </StackPanel>
+
+                </Button>
+
+
+                <Button
+                    Grid.Row="1"
+                    Margin="5"
+                    x:Name="SaveButton"
+                    Style="{StaticResource MaterialDesignOutlinedButton}"
+                    Click="SaveButton_OnClick"
+                    d:IsHidden="false"
+                    Visibility="Hidden"
+                >
+
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <md:PackIcon Kind="ContentSave" VerticalAlignment="Center"/>
+                        <Label Content="保存配置" />
+                    </StackPanel>
+
+                </Button>
+
+
+
+
+
+            </Grid>
+
+        </StackPanel>
+
+
+
+
+
+
+        <!--图形化-->
+        <Grid
+            Grid.Column="2"
+            HorizontalAlignment="Stretch"
+            >
+
+            <GroupBox 
+               Header="其他字段管理"  
+               BorderThickness="0"
+               
+               >
+
+
+
+
+
+            </GroupBox>
+
+
+        </Grid>
+
+
+
+    </Grid>
+</UserControl>

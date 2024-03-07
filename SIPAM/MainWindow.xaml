@@ -1,0 +1,98 @@
+﻿<Window x:Class="SIPAM.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SIPAM"
+        xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Foreground="Teal"
+        FontFamily="SimSun"
+        Title="MainWindow"
+        Height="400"
+        Width="600"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        MouseDown="Window_MouseDown"
+        >
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="40*"/>
+        </Grid.RowDefinitions>
+
+
+        <Grid  VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="450"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="40"/>
+            </Grid.ColumnDefinitions>
+           
+            <StackPanel 
+                Margin="10,0,0,0"
+                Grid.Column="0" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Center"
+                Orientation="Horizontal"
+                >
+                <Button 
+                    x:Name="SettingButton"  
+                    VerticalAlignment="Center" 
+                    Width="48" Height="48"  
+                    Background="{x:Null}" 
+                    BorderBrush="{x:Null}"  
+                    Padding="0" 
+                    Foreground="{x:Null}" 
+                    Click="SettingButton_Click"
+                    >
+                    <md:PackIcon Kind="Cogs" Height="48" Width="48" Foreground="Teal"/>
+
+                </Button>
+                <TextBlock
+                    Margin="10"
+                    Style="{StaticResource MaterialDesignHeadline4TextBlock}"
+                    Text="IP地址分配管理系统" />
+            </StackPanel>
+            
+            <StackPanel Margin="0,5,10,0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="top" Orientation="Horizontal">
+                <md:PackIcon Kind="Language" Margin="5,0,5,0" VerticalAlignment="Center"></md:PackIcon>
+                
+                <ComboBox
+                  md:HintAssist.Hint="语言切换"
+                  md:HintAssist.HintOpacity=".4"
+                  IsEditable="True">
+                                    <ComboBoxItem
+                    Content="简体中文" />
+                                    <ComboBoxItem
+                    Content="English" />
+
+                 </ComboBox>
+
+            </StackPanel>
+            
+            <StackPanel 
+                Grid.Column="2" 
+                Orientation="Horizontal" 
+                VerticalAlignment="top"
+                HorizontalAlignment="Left"
+                >
+                <Button x:Name="CloseButton"  VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="40" Height="40"  Background="{x:Null}" BorderBrush="{x:Null}"  Padding="0" Foreground="{x:Null}" Click="CloseButton_Click">
+                    <md:PackIcon Kind="Close" Height="30" Width="30" Foreground="Teal"></md:PackIcon>
+                </Button>
+            </StackPanel>
+        </Grid>
+
+        <StackPanel x:Name="MainWindowPlan" Grid.Row="1">
+            
+            
+            
+        </StackPanel>
+
+       
+        
+        
+    </Grid>
+</Window>

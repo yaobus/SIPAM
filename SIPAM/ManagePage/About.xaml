@@ -1,0 +1,75 @@
+﻿<UserControl x:Class="SIPAM.ManagePage.About"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SIPAM.ManagePage"
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:Background="AliceBlue"
+             FontSize="20"
+             d:DesignHeight="720" d:DesignWidth="1280"
+             d:VerticalAlignment="Stretch" 
+
+             >
+
+    <Grid>
+          <StackPanel
+              Margin="0,50"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+              >
+              <TextBlock
+                  Margin="0,10"
+                  Style="{StaticResource MaterialDesignHeadline4TextBlock}"
+                  Text="软件名称：SIPAM 简单IP地址分配管理系统" />
+              
+              <TextBlock
+                  Margin="0,10"
+                  Style="{StaticResource MaterialDesignHeadline4TextBlock}"
+                  Text="软件版本号：Ver1.0-Beta" />
+
+              <TextBlock
+                  Margin="0,10"
+                  Style="{StaticResource MaterialDesignHeadline4TextBlock}"
+                  Text="软件作者：Yaobus" />
+
+              <TextBlock
+                  Margin="0,10"
+                  MouseDown="UIElement_OnMouseDown"
+                  Style="{StaticResource MaterialDesignHeadline4TextBlock}"
+                  Text="Github主页：https://github.com/yaobus/SIPAM.git" />
+
+                   <StackPanel
+                      Orientation="Horizontal"
+                      VerticalAlignment="Center"
+                      >
+                   
+                      <TextBlock
+                        Style="{StaticResource MaterialDesignHeadline4TextBlock}"
+                        Text="最好不要联系我: 642390042@qq.com" />
+
+
+                  
+
+
+                    </StackPanel>
+
+            
+
+
+            <TextBox
+                  Margin="0,10"
+                  TextWrapping="Wrap"
+                  Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                  Text="开源说明：由于本软件源代码目前托管在本地SVN服务器，后期会在合适的时候完全开源到Github" />
+
+        </StackPanel>  
+
+
+
+
+
+
+    </Grid>
+</UserControl>

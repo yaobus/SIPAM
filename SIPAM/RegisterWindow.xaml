@@ -1,0 +1,222 @@
+﻿<Window x:Class="SIPAM.RegisterWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SIPAM"
+        xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Foreground="Teal"
+        FontFamily="SimSun"
+        FontSize="16"
+        Title="MainWindow"
+        Height="500"
+        Width="800"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        MouseDown="RegisterWindow_OnMouseDown"
+        Loaded="RegisterWindow_OnLoaded"
+        >
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="120"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel
+        Grid.ColumnSpan="2"
+        Orientation="Horizontal"
+        VerticalAlignment="Center"
+        >
+            <md:PackIcon  
+                Kind="Register" 
+                Margin="30,5,5,5"
+                Height="40"
+                Width="40"
+                VerticalAlignment="Center"      
+                          
+                          />
+
+            <TextBlock
+                Margin="10"
+                Style="{StaticResource MaterialDesignHeadline4TextBlock}"
+                Text="SIPAM 新用户注册" />
+
+        </StackPanel>
+
+        <StackPanel 
+            Margin="5"
+            Grid.Row="0"
+            Grid.Column="1"
+            Orientation="Horizontal" 
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            >
+            <Button 
+                x:Name="CloseButton"  
+                VerticalAlignment="Bottom" 
+                HorizontalAlignment="Right" 
+                Width="40" Height="40"  
+                Background="{x:Null}" 
+                BorderBrush="{x:Null}"  
+                Padding="0" 
+                Foreground="{x:Null}" 
+                Click="CloseButton_OnClick"
+                >
+                <md:PackIcon Kind="Close" Height="30" Width="30" Foreground="Teal"></md:PackIcon>
+            </Button>
+        </StackPanel>
+
+
+        <StackPanel
+            Grid.Column="0"
+            Grid.Row="1"
+            >
+
+            <TextBox
+               Margin="30,15,15,5"
+                x:Name="UserNameBox"
+                Text=""
+                Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                VerticalAlignment="Top"
+                AcceptsReturn="False"
+                TextWrapping="NoWrap"
+                VerticalScrollBarVisibility="Auto"
+                md:HintAssist.Hint="{DynamicResource LoginUM}"
+            />
+
+            <PasswordBox
+                Margin="30,15,15,5"
+                x:Name="UserPasswordBox"
+                Style="{StaticResource MaterialDesignOutlinedPasswordBox}"
+                VerticalAlignment="Top"
+                Password=""
+                md:HintAssist.Hint="请输入密码" />
+
+            <PasswordBox
+                Margin="30,15,15,5"
+                x:Name="UserPasswordBoxAgain"
+                Style="{StaticResource MaterialDesignOutlinedPasswordBox}"
+                VerticalAlignment="Top"
+                Password=""
+                md:HintAssist.Hint="请再次输入密码" />
+
+            <TextBox
+                Margin="30,15,15,5"
+                x:Name="RealNameBox"
+                Text=""
+                Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                VerticalAlignment="Top"
+                AcceptsReturn="False"
+                TextWrapping="NoWrap"
+                VerticalScrollBarVisibility="Auto"
+                md:HintAssist.Hint="姓名"
+            />
+
+            <Button
+                Margin="30,15,15,5"
+                x:Name="BackButton"
+                Height="50"
+                Style="{StaticResource MaterialDesignOutlinedButton}"
+                ToolTip="返回登录" 
+                Click="BackButton_OnClick"
+                >
+
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" >
+                    <md:PackIcon Margin="0,0,10,0" Kind="ArrowLeft" Width="30" Height="30"/>
+                    <TextBlock Text="返回登录" VerticalAlignment="Center" Style="{DynamicResource MaterialDesignBody1TextBlock}"/>
+                </StackPanel>
+            </Button>
+
+        </StackPanel>
+
+        <StackPanel
+            Grid.Column="1"
+            Grid.Row="1"
+    
+            >
+            <ComboBox
+                Margin="15,15,30,5"
+                x:Name="DepartmentComboBox"
+                Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                md:HintAssist.Hint="请选择部门"
+                ItemsSource="{Binding ShortStringList}"
+                
+            />
+            <TextBox
+                Margin="15,15,30,5"
+                x:Name="EmailBox"
+                Text=""
+                Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                VerticalAlignment="Top"
+                AcceptsReturn="False"
+                TextWrapping="NoWrap"
+                VerticalScrollBarVisibility="Auto"
+                md:HintAssist.Hint="E-mail"
+            />
+            <TextBox
+                Margin="15,15,30,5"
+                x:Name="TelBox"
+                Text=""
+                Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                VerticalAlignment="Top"
+                AcceptsReturn="False"
+                TextWrapping="NoWrap"
+                VerticalScrollBarVisibility="Auto"
+                md:HintAssist.Hint="固定电话"
+            />
+            <TextBox
+                Margin="15,15,30,5"
+                x:Name="PhoneBox"
+                Text=""
+                Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                VerticalAlignment="Top"
+                AcceptsReturn="False"
+                TextWrapping="NoWrap"
+                VerticalScrollBarVisibility="Auto"
+                md:HintAssist.Hint="移动电话"
+            />
+
+            <Button
+                x:Name="SubmitButton"
+                Margin="15,15,30,5"     
+                Height="50"
+                Style="{StaticResource MaterialDesignOutlinedButton}"
+                ToolTip="点击以登陆系统" 
+                Click="SubmitButton_OnClick"
+                >
+
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" >
+                    <md:PackIcon Margin="0,0,10,0" Kind="PresenceEnter" Width="30" Height="30"></md:PackIcon>
+                    <TextBlock Text="提交申请" VerticalAlignment="Center" Style="{DynamicResource MaterialDesignBody1TextBlock}"/>
+                </StackPanel>
+            </Button>
+
+
+        </StackPanel>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </Grid>
+</Window>
