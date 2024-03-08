@@ -58,11 +58,6 @@
             
 
 
-            <TextBox
-                  Margin="0,10"
-                  TextWrapping="Wrap"
-                  Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                  Text="开源说明：由于本软件源代码目前托管在本地SVN服务器，后期会在合适的时候完全开源到Github" />
 
         </StackPanel>  
 
