@@ -33,6 +33,7 @@
                     Style="{StaticResource MaterialDesignOutlinedPasswordBox}"
                     VerticalAlignment="Top"
                     Password=""
+                    KeyDown="UserPasswordBox_OnKeyDown"
                     md:HintAssist.Hint="{DynamicResource LoginPW}" />
 
                 <Button
@@ -48,7 +49,14 @@
                     </StackPanel>
                 </Button>
 
-                <Button
+                <Grid>
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button
+                        Grid.Column="0"
                     x:Name="RegisterButton"
                     Margin="5"
                     Height="50"
@@ -56,20 +64,40 @@
                     ToolTip="点击以注册新用户" 
                     Click="RegisterButton_Click"
                     >
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" >
-                        <md:PackIcon Margin="0,0,10,0" Kind="Register"  Width="20" Height="30"></md:PackIcon>
-                        <TextBlock Text="{DynamicResource Register}" VerticalAlignment="Center" Style="{DynamicResource MaterialDesignBody1TextBlock}"/>
-                    </StackPanel>
-                </Button>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" >
+                            <md:PackIcon Margin="0,0,10,0" Kind="Register"  Width="20" Height="30"></md:PackIcon>
+                            <TextBlock Text="{DynamicResource Register}" VerticalAlignment="Center" Style="{DynamicResource MaterialDesignBody1TextBlock}"/>
+                        </StackPanel>
+                    </Button>
+
+                    <Button
+                        Grid.Column="1"
+                    x:Name="PasswordButton"
+                    Margin="5"
+                    Height="50"
+                    Style="{StaticResource MaterialDesignOutlinedButton}"
+                    ToolTip="点击以修改密码" 
+                    Click="PasswordButton_Click"
+                    >
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" >
+                            <md:PackIcon Margin="0,0,10,0" Kind="Password"  Width="20" Height="30"></md:PackIcon>
+                            <TextBlock Text="修改密码" VerticalAlignment="Center" Style="{DynamicResource MaterialDesignBody1TextBlock}"/>
+                        </StackPanel>
+                    </Button>
+
+                </Grid>
 
 
 
-            </StackPanel>  
-            
-            
-            
-            
-            
+
+
+
+            </StackPanel>
+
+
+
+
+
         </Grid>
     </md:TransitioningContent>
 </UserControl>

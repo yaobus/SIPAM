@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{9997BE06-985E-44E9-A271-3C7D9E782514}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <RootNamespace>SIPAM</RootNamespace>
     <AssemblyName>SIPAM</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
@@ -160,6 +160,9 @@
       <DependentUpon>RegisterWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModes\ViewModes.cs" />
+    <Compile Include="Windows\ChangePasswordWindow.xaml.cs">
+      <DependentUpon>ChangePasswordWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="ApplyWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -223,6 +226,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows\ChangePasswordWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainWindowPage\DBSettingPage.xaml.cs">
@@ -275,9 +282,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Windows\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
       <Visible>False</Visible>

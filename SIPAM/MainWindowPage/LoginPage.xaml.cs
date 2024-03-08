@@ -17,6 +17,7 @@ using MySqlConnector;
 using SIPAM.DbOperation;
 using SIPAM.EncryptionDecryptionFunction;
 using SIPAM.GlobalVariable;
+using SIPAM.Windows;
 
 namespace SIPAM.MainWindowPage
 {
@@ -190,5 +191,34 @@ namespace SIPAM.MainWindowPage
 
         }
 
+
+        /// <summary>
+        /// 加载修改密码界面
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void PasswordButton_Click(object sender, RoutedEventArgs e)
+        {
+
+
+
+            Window changPasswordWindow = new ChangePasswordWindow();
+            var window = Window.GetWindow(this);//关闭父窗体
+            window?.Close();
+
+            //打开新窗口
+            changPasswordWindow.Show();
+
+
+
+        }
+
+        private void UserPasswordBox_OnKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                LoginButton_Click(null, null);
+            }
+        }
     }
 }
