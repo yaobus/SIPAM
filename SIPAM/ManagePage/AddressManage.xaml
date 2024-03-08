@@ -57,7 +57,7 @@
         </DockPanel>
 
         <!--地址列表-->
-       
+
         <StackPanel
             Grid.Column="1"
             Margin="0"
@@ -139,7 +139,7 @@
             </GroupBox>
 
 
-            
+
 
 
         </StackPanel>
@@ -243,7 +243,7 @@
 
 
                 </StackPanel>
-                
+
 
             </GroupBox>
 
@@ -252,8 +252,8 @@
                         BorderThickness="0"
                         Header="IP地址保留设置">
 
-                
-                
+
+
                 <StackPanel Margin="0" Orientation="Vertical">
 
                     <Grid
@@ -266,7 +266,7 @@
                         </Grid.ColumnDefinitions>
 
 
-                            <CheckBox
+                        <CheckBox
                             x:Name="LockBoxFirst"
                             Grid.Column="0"
                             Content="首IP"
@@ -278,7 +278,7 @@
 
 
 
-                            <CheckBox
+                        <CheckBox
                             x:Name="LockBoxLast"
                             Grid.Column="1"
                             Content="尾IP"
@@ -288,7 +288,7 @@
                             Click="LockBoxLast_OnClick"
                             Style="{StaticResource MaterialDesignFilterChipCheckBox}" />
 
-                            <CheckBox
+                        <CheckBox
                             x:Name="LockBoxOther"
                             Grid.Column="2"  
                             Content="其他IP"
@@ -338,36 +338,37 @@
 
 
             <Grid 
-                Margin="5"
+                Margin="5,-10,5,5"
                 >
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="50*"/>
-                    <ColumnDefinition Width="50*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
 
 
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
 
                 <Button
                     Grid.Column="0"
-                      Margin="5"
+                      Margin="5,5,5,5"
                       x:Name="GraphicsButton"
                     IsEnabled="False"
                       Style="{StaticResource MaterialDesignOutlinedButton}"
                       Click="GraphicsButton_OnClick">
-                   
+
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                         <md:PackIcon Kind="GraphAreaspline" VerticalAlignment="Center"/>
                         <Label Content="图形化显示" />
 
                     </StackPanel>
-                    
-                    
-                    
+
+
+
                 </Button>
 
 
@@ -377,7 +378,7 @@
                 <Button
                     Grid.Row="0"
                     Grid.Column="1"
-                    Margin="5,0"
+                    Margin="5,5,5,5"
                     x:Name="AddButton"
                     Style="{StaticResource MaterialDesignOutlinedButton}"
                     Click="AddButton_OnClick"
@@ -390,37 +391,64 @@
 
                 </Button>
 
-                <Button
+                <StackPanel 
                     Grid.Column="0"
                     Grid.ColumnSpan="2"
-                    Grid.Row="1"
-                    Margin="5"
-                    x:Name="SaveButton"
-                    Visibility="Hidden"
-                    d:Visibility="Visible"
-                    Style="{StaticResource MaterialDesignOutlinedButton}"
-                    Click="SaveButton_OnClick"
+                    Grid.Row="1"        
+                    Orientation="Vertical"        
                     >
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                        <md:PackIcon Kind="ContentSave" VerticalAlignment="Center"/>
-                        <Label Content="保存网段" />
-                    </StackPanel>
 
-                </Button>
+                    <Button
+
+                        Margin="5"
+                        x:Name="SaveButton"
+                        Visibility="Collapsed"
+                        d:Visibility="Visible"
+                        Style="{StaticResource MaterialDesignOutlinedButton}"
+                        Click="SaveButton_OnClick"
+                    >
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <md:PackIcon Kind="ContentSave" VerticalAlignment="Center"/>
+                            <Label Content="保存网段" />
+                        </StackPanel>
+
+                    </Button>
+
+                    <Button
+
+                        Margin="5"
+                        x:Name="DelButton"
+                        Visibility="Hidden"
+                        d:Visibility="Visible"
+                        Style="{StaticResource MaterialDesignOutlinedButton}"
+                        Click="DelButton_OnClick"
+                    >
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <md:PackIcon Kind="Delete" VerticalAlignment="Center"/>
+                            <Label Content="删除网段" />
+                        </StackPanel>
+
+                    </Button>
+
+
+                </StackPanel>
+
+
+
             </Grid>
-            
-            
 
-            
-            
-            
-            
-            
+
+
+
+
+
+
+
 
 
         </StackPanel>
 
-        
+
 
 
 
@@ -553,7 +581,7 @@
                                 Text="广播地址" />
                             </Button>
                         </Grid>
-                       
+
                     </StackPanel>
 
 

@@ -53,6 +53,9 @@ namespace SIPAM.ManagePage
             YLine.Width = SystemParameters.WorkArea.Size.Height - 60;
         }
 
+
+        private string SelectDepartment = "";
+
         /// <summary>
         /// 部门被选中
         /// </summary>
@@ -60,7 +63,12 @@ namespace SIPAM.ManagePage
         /// <param name="e"></param>
         private void OrgListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            int index = OrgListView.SelectedIndex;
+            if (index != -1)
+            {
+                 SelectDepartment = departmentInfos[index].Department;
+                 DelButton.Visibility = Visibility.Visible;
+            }
 
 
 
@@ -107,7 +115,7 @@ namespace SIPAM.ManagePage
 
                     LoadDepartmentData();
 
-                    SaveButton.Visibility = Visibility.Hidden;
+                    SaveButton.Visibility = Visibility.Collapsed;
                     GroupTextBox.IsEnabled = false;
                     DescriptionText.IsEnabled = false;
                 }
@@ -169,5 +177,27 @@ namespace SIPAM.ManagePage
 
 
 
+
+        /// <summary>
+        /// 删除部门
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DelButton_OnClick(object sender, RoutedEventArgs e)
+        {
+
+
+            MessageBoxResult result = MessageBox.Show("确认删除该数据吗？注意此操作不可逆！", "你最好知道自己在做什么！", MessageBoxButton.OKCancel,
+                MessageBoxImage.Information);
+
+            if (result == MessageBoxResult.OK)
+            {
+                string sql = string.Format("DELETE FROM `department` WHERE `department` = '{0}'", SelectDepartment);
+                DbClass.ModifySql(sql);
+                LoadDepartmentData();
+                SaveButton.Visibility = Visibility.Collapsed;
+
+            }
+        }
     }
 }

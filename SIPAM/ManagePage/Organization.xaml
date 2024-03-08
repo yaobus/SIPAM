@@ -223,22 +223,48 @@
                 </Button>
 
 
-                <Button
-                    Grid.Row="1"
-                    Margin="5"
-                    x:Name="SaveButton"
-                    Style="{StaticResource MaterialDesignOutlinedButton}"
-                    Click="SaveButton_OnClick"
-                    d:IsHidden="false"
-                    Visibility="Hidden"
+                <StackPanel
+                Grid.Row="1"
                 >
+                    <Button
+                        
+                        Margin="5"
+                        x:Name="SaveButton"
+                        Style="{StaticResource MaterialDesignOutlinedButton}"
+                        Click="SaveButton_OnClick"
+                        d:IsHidden="false"
+                        Visibility="Collapsed"
+                    >
 
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                        <md:PackIcon Kind="ContentSave" VerticalAlignment="Center"/>
-                        <Label Content="保存配置" />
-                    </StackPanel>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <md:PackIcon Kind="ContentSave" VerticalAlignment="Center"/>
+                            <Label Content="保存档案" />
+                        </StackPanel>
 
-                </Button>
+                    </Button>
+
+                    <Button
+        
+                        Margin="5"
+                        x:Name="DelButton"
+                        Style="{StaticResource MaterialDesignOutlinedButton}"
+                        Click="DelButton_OnClick"
+                        d:IsHidden="false"
+                        Visibility="Collapsed"
+                    >
+
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <md:PackIcon Kind="Delete" VerticalAlignment="Center"/>
+                            <Label Content="删除档案" />
+                        </StackPanel>
+
+                    </Button>
+
+
+
+                </StackPanel>
+
+
 
 
 

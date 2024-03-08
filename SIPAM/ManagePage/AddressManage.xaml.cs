@@ -14,6 +14,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
@@ -40,7 +41,7 @@ namespace SIPAM.ManagePage
         {
             InitializeComponent();
 
-           
+
         }
 
 
@@ -53,7 +54,7 @@ namespace SIPAM.ManagePage
         /// </summary>
         public bool LoadStatus = false;
 
-       /// <summary>
+        /// <summary>
         /// 初始化加载状态,并加载初始状态IP地址
         /// </summary>
         /// <param name="sender"></param>
@@ -62,7 +63,7 @@ namespace SIPAM.ManagePage
         {
             //页面加载完成，标志位
             LoadStatus = true;
-            
+
             CalculateIpAddress();
 
             AddressListView.ItemsSource = AddressInfos;
@@ -84,8 +85,10 @@ namespace SIPAM.ManagePage
             //用于标识不自动生成配置
             selectStatus = 1;
 
+            ClearInput();
+
             int index = AddressListView.SelectedIndex;
-            
+
             string tableName;
 
             GraphicsPlan.Children.Clear();
@@ -97,11 +100,13 @@ namespace SIPAM.ManagePage
 
                 IpTextBox.Text = AddressInfos[index].Network;
                 MaskText.Text = AddressInfos[index].Netmask;
-              
+
                 CalculateNetMaskLocated();
                 CalculateIpAddress();
 
                 TbAttention.Text = AddressInfos[index].Attention;
+
+                DelButton.Visibility = Visibility.Visible;
 
             }
 
@@ -117,7 +122,7 @@ namespace SIPAM.ManagePage
         /// </summary>
         private void LoadAddressConfig(string tableName)
         {
-            
+
 
             string sql = string.Format("SELECT * FROM {0} ORDER BY Address ASC", tableName);
 
@@ -129,7 +134,7 @@ namespace SIPAM.ManagePage
             {
                 int address = reader.GetInt32("Address");
                 int addressStatus = reader.GetInt32("AddressStatus");
-                string description =DbClass.GetReaderString(reader,"Description");
+                string description = DbClass.GetReaderString(reader, "Description");
                 string applyUser = DbClass.GetReaderString(reader, "ApplyUser");
 
 
@@ -147,7 +152,7 @@ namespace SIPAM.ManagePage
                 DateTime applyTime = DateTime.MinValue;
 
                 string ratify = "";
-                DateTime ratifyTime = DateTime.MinValue; 
+                DateTime ratifyTime = DateTime.MinValue;
 
                 ViewModes.ViewModes.IpAddressInfo ipAddress = new IpAddressInfo(address, addressStatus, description,
                     applyUser, useTo, userDepartment, email, userTel, phoneNumber, deviceType, deviceModel, deviceMac,
@@ -182,34 +187,36 @@ namespace SIPAM.ManagePage
                 {
                     case 0:
                         colorBrush = Brushes.DimGray;
-                        description = "网段IP地址" ;
-                       
+                        description = "网段IP地址";
+
                         break;
 
                     case 1:
                         colorBrush = Brushes.DarkCyan;
-                        description = "保留IP地址" ;
-                      
+                        description = "保留IP地址";
+
                         break;
 
                     case 2:
                         colorBrush = Brushes.LimeGreen;
-                        description = "可用IP地址" ;
+                        description = "可用IP地址";
                         //status = true;
 
                         break;
 
                     case 3:
                         colorBrush = Brushes.DarkOrange;
-                        description = "锁定IP地址" + "\r" + ipAddressInfos[i].Description + "\r" + ipAddressInfos[i].ApplyUser;
-                      
+                        description = "锁定IP地址" + "\r" + ipAddressInfos[i].Description + "\r" +
+                                      ipAddressInfos[i].ApplyUser;
+
 
                         break;
 
                     case 4:
                         colorBrush = Brushes.OrangeRed;
-                        description = "已用IP地址" + "\r" + ipAddressInfos[i].Description + "\r" + ipAddressInfos[i].ApplyUser;
-                        
+                        description = "已用IP地址" + "\r" + ipAddressInfos[i].Description + "\r" +
+                                      ipAddressInfos[i].ApplyUser;
+
 
                         break;
 
@@ -217,7 +224,7 @@ namespace SIPAM.ManagePage
                     case 5:
                         colorBrush = Brushes.LightSlateGray;
                         description = "广播IP地址";
-                        
+
 
                         break;
 
@@ -346,7 +353,7 @@ namespace SIPAM.ManagePage
 
             string strTemp = ipStr.Substring(0, index);
 
-           
+
 
 
         }
@@ -368,20 +375,20 @@ namespace SIPAM.ManagePage
                 strTemp = "256";
             }
 
-            string str = Convert.ToString( Convert.ToInt32(strTemp), 2);
+            string str = Convert.ToString(Convert.ToInt32(strTemp), 2);
 
 
 
             index = str.IndexOf("0");
 
 
-            string str2 = str.Substring(index , str.Length - index);
+            string str2 = str.Substring(index, str.Length - index);
 
-           // MessageBox.Show(str2);
+            // MessageBox.Show(str2);
 
 
 
-             MaskSlider.Value = 32 - str2.Length;
+            MaskSlider.Value = 32 - str2.Length;
         }
 
 
@@ -423,7 +430,7 @@ namespace SIPAM.ManagePage
                     if (i == 1 & LockBoxFirst.IsChecked == true)
                     {
                         description = "保留IP地址";
-                        colorBrush = Brushes.DarkCyan ;
+                        colorBrush = Brushes.DarkCyan;
                         //status = 1;
 
                     }
@@ -491,7 +498,7 @@ namespace SIPAM.ManagePage
 
             }
 
-          
+
 
         }
 
@@ -563,7 +570,9 @@ namespace SIPAM.ManagePage
                 {
                     string tableName;
 
-                    string sqlTemp = string.Format("SELECT COUNT(*) FROM network WHERE network = '{0}' AND netmask = '{1}'", ip, MaskText.Text);
+                    string sqlTemp =
+                        string.Format("SELECT COUNT(*) FROM network WHERE network = '{0}' AND netmask = '{1}'", ip,
+                            MaskText.Text);
 
                     int num = DbClass.ExecuteScalarTableNum(sqlTemp);
 
@@ -572,7 +581,8 @@ namespace SIPAM.ManagePage
                     {
                         string msg = string.Format("已存在同配置网段{0}个，是否继续添加同配置网段？", num.ToString());
 
-                        MessageBoxResult result = MessageBox.Show(msg, "确认", MessageBoxButton.YesNo, MessageBoxImage.Information);
+                        MessageBoxResult result = MessageBox.Show(msg, "确认", MessageBoxButton.YesNo,
+                            MessageBoxImage.Information);
 
                         if (result == MessageBoxResult.Yes)
                         {
@@ -584,7 +594,10 @@ namespace SIPAM.ManagePage
 
 
                             //插入网段信息总表的数据
-                            string sql = string.Format("INSERT INTO network (id,tableName,network,netmask,description,authority,creator,date,status,attention) VALUES ({0},'{1}','{2}','{3}','{4}','{5}','{6}','{7}',{8},'{9}')", index + 1, tableName, ip, MaskText.Text, IpDescription.Text, "g1p", Variable.UserInfo.User, DateTime.Now, 0, TbAttention.Text);
+                            string sql = string.Format(
+                                "INSERT INTO network (id,tableName,network,netmask,description,authority,creator,date,status,attention) VALUES ({0},'{1}','{2}','{3}','{4}','{5}','{6}','{7}',{8},'{9}')",
+                                index + 1, tableName, ip, MaskText.Text, IpDescription.Text, "g1p",
+                                Variable.UserInfo.User, DateTime.Now, 0, TbAttention.Text);
 
                             //Console.WriteLine(sql);
                             DbClass.ModifySql(sql);
@@ -605,7 +618,7 @@ namespace SIPAM.ManagePage
                             InitializedData(tableName);
 
 
-                            
+
                         }
                         else if (result == MessageBoxResult.No)
                         {
@@ -620,14 +633,17 @@ namespace SIPAM.ManagePage
                     {
                         tableName = CreateTableName(ip) + "_1";
 
-      
+
 
                         int index = DbClass.ExecuteScalarTableNum("SELECT COUNT(*) FROM network");
 
 
 
                         //插入网段信息总表的数据
-                        string sql = string.Format("INSERT INTO network (id,tableName,network,netmask,description,authority,creator,date,status,attention) VALUES ({0},'{1}','{2}','{3}','{4}','{5}','{6}','{7}',{8},'{9}')", index + 1, tableName, ip, MaskText.Text, IpDescription.Text, "g1p", Variable.UserInfo.User, DateTime.Now, 0, TbAttention.Text);
+                        string sql = string.Format(
+                            "INSERT INTO network (id,tableName,network,netmask,description,authority,creator,date,status,attention) VALUES ({0},'{1}','{2}','{3}','{4}','{5}','{6}','{7}',{8},'{9}')",
+                            index + 1, tableName, ip, MaskText.Text, IpDescription.Text, "g1p", Variable.UserInfo.User,
+                            DateTime.Now, 0, TbAttention.Text);
 
                         //Console.WriteLine(sql);
                         DbClass.ModifySql(sql);
@@ -642,9 +658,9 @@ namespace SIPAM.ManagePage
                         LoadAddressData();
 
                         //装载初始数据
-                       InitializedData(tableName);
+                        InitializedData(tableName);
 
-                       
+
                     }
 
 
@@ -660,10 +676,10 @@ namespace SIPAM.ManagePage
             }
             else
             {
-                MessageBox.Show("IP地址不合法，请检查IP地址是否正确!");
+                MessageBox.Show("IP地址不合法，请检查IP地址是否正确!", "确定", MessageBoxButton.OK, MessageBoxImage.Information);
             }
 
-            
+
         }
 
 
@@ -689,7 +705,8 @@ namespace SIPAM.ManagePage
         private void CreateTable(string tableName)
         {
             string sql = string.Format(
-                 "CREATE TABLE IF NOT EXISTS {0} (Address INT NOT NULL ,AddressStatus INT,Description VARCHAR ( 40 ),ApplyUser VARCHAR ( 40 ),UseTo VARCHAR ( 40 ),UserDepartment VARCHAR ( 40 ),Email VARCHAR ( 40 ),UserTel VARCHAR ( 12 ),PhoneNumber VARCHAR ( 14 ),DeviceType VARCHAR ( 40 ),DeviceModel VARCHAR ( 40 ),DeviceMac VARCHAR ( 20 ),DeviceAddress VARCHAR ( 40 ),ApplyTime VARCHAR ( 40 ),Ratify VARCHAR ( 40 ),RatifyTime DATE );", tableName);
+                "CREATE TABLE IF NOT EXISTS {0} (Address INT NOT NULL ,AddressStatus INT,Description VARCHAR ( 40 ),ApplyUser VARCHAR ( 40 ),UseTo VARCHAR ( 40 ),UserDepartment VARCHAR ( 40 ),Email VARCHAR ( 40 ),UserTel VARCHAR ( 12 ),PhoneNumber VARCHAR ( 14 ),DeviceType VARCHAR ( 40 ),DeviceModel VARCHAR ( 40 ),DeviceMac VARCHAR ( 20 ),DeviceAddress VARCHAR ( 40 ),ApplyTime VARCHAR ( 40 ),Ratify VARCHAR ( 40 ),RatifyTime DATE );",
+                tableName);
 
             MySqlDataReader reader = DbClass.CarrySqlCmd(sql);
 
@@ -706,12 +723,13 @@ namespace SIPAM.ManagePage
         {
             //需要写入的IP数量
             int x = Convert.ToInt32(NumBox.Text);
-            
+
             List<string> lockList = new List<string>();
+
             string[] ls = null;
-           
+
             ls = LockedIp.Text.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-            
+
             lockList = new List<string>(ls);
 
 
@@ -719,7 +737,7 @@ namespace SIPAM.ManagePage
 
             for (int i = 0; i < x; i++)
             {
-               //IP地址锁定状态：0网段IP，1锁定IP，5广播IP
+                //IP地址锁定状态：0网段IP，1锁定IP，5广播IP
                 int addressStatus = 0;
 
                 //string description;
@@ -730,7 +748,7 @@ namespace SIPAM.ManagePage
                 if (i == 0)
                 {
                     addressStatus = 0;
-                    
+
 
                 }
                 else
@@ -776,13 +794,14 @@ namespace SIPAM.ManagePage
 
 
 
-                string sql =string.Format( "INSERT INTO `{0}` (`Address`, `AddressStatus`) VALUES ({1}, {2})",tableName,i,addressStatus);
+                string sql = string.Format("INSERT INTO `{0}` (`Address`, `AddressStatus`) VALUES ({1}, {2})",
+                    tableName, i, addressStatus);
 
 
-               //DbClass.ExecuteSql(sql);
+                //DbClass.ExecuteSql(sql);
 
-               //异步执行
-              DbClass.ExecuteSqlAsync(sql);
+                //异步执行
+                DbClass.ExecuteSqlAsync(sql);
 
 
             }
@@ -799,6 +818,7 @@ namespace SIPAM.ManagePage
         private void UnlockInput()
         {
             IpTextBox.IsEnabled = true;
+            IpTextBox.Text = "";
             MaskSlider.IsEnabled = true;
             LockBoxFirst.IsEnabled = true;
             LockBoxLast.IsEnabled = true;
@@ -808,6 +828,7 @@ namespace SIPAM.ManagePage
             GraphicsButton.IsEnabled = true;
             TbAttention.IsEnabled = true;
             SaveButton.Visibility = Visibility.Visible;
+            DelButton.Visibility = Visibility.Hidden;
             GraphicsPlan.Children.Clear();
 
             TbAttention.Text = "默认网关：\r\n子网掩码：\r\nDNS：\r\nNTP：\r\nKMS：";
@@ -829,7 +850,7 @@ namespace SIPAM.ManagePage
             IpDescription.IsEnabled = false;
             GraphicsButton.IsEnabled = false;
             TbAttention.IsEnabled = false;
-            SaveButton.Visibility = Visibility.Hidden;
+            SaveButton.Visibility = Visibility.Collapsed;
             TbAttention.Text = "";
         }
 
@@ -876,7 +897,8 @@ namespace SIPAM.ManagePage
                 DateTime date = reader.GetDateTime("date");
 
 
-                AddressInfos.Add(new AddressInfo(id, tableName, network, netmask, attention,description,authority, creator, date));
+                AddressInfos.Add(new AddressInfo(id, tableName, network, netmask, attention, description, authority,
+                    creator, date));
 
 
             }
@@ -897,7 +919,7 @@ namespace SIPAM.ManagePage
         /// <returns></returns>
         public static string ReplaceChineseComma(string input)
         {
-         // 使用 Replace 方法将中文逗号替换为英文逗号
+            // 使用 Replace 方法将中文逗号替换为英文逗号
             return input.Replace("，", ",");
         }
 
@@ -917,6 +939,42 @@ namespace SIPAM.ManagePage
 
 
 
+        }
+
+
+
+        /// <summary>
+        /// 删除网段
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DelButton_OnClick(object sender, RoutedEventArgs e)
+        {
+
+
+            int index = AddressListView.SelectedIndex;
+
+            MessageBoxResult result = MessageBox.Show("危险！此操作将删除此网段！是否继续？", "你最好清楚自己在做什么", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+            if (result == MessageBoxResult.Yes)
+            {
+               string sql = string.Format("UPDATE `network` SET `status` = '1' WHERE `tableName` = '{0}'", AddressInfos[index].TableName);
+
+                Console.WriteLine(sql);
+
+                DbClass.ModifySql(sql);
+
+                DelButton.Visibility = Visibility.Collapsed;
+
+
+                //重新加载地址列表
+                LoadAddressData();
+
+               
+
+
+
+            }
         }
     }
 }
