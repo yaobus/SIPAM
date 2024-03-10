@@ -763,5 +763,25 @@ namespace SIPAM
                 this.WindowState = WindowState.Normal;
             }
         }
+
+
+        /// <summary>
+        /// 登出
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BT_LoginOut_OnClick(object sender, RoutedEventArgs e)
+        {
+
+
+			Window mainWindow = new MainWindow();
+			var window = Window.GetWindow(this); //关闭父窗体
+			window?.Close();
+
+			//打开新窗口
+			mainWindow.Show();
+
+
+		}
     }
 }

@@ -20,7 +20,7 @@
         Loaded="Window_Loaded"
         SizeChanged="Window_SizeChanged"
         >
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
@@ -31,7 +31,7 @@
 
 
 
-        
+
         <!--标题栏-->
         <StackPanel
             Grid.Row="0"
@@ -46,7 +46,7 @@
         </StackPanel>
 
 
-        
+
         <!--分隔条-->
         <StackPanel
             Grid.Row="0"
@@ -56,14 +56,14 @@
             <ProgressBar
                 Height="3"
             IsIndeterminate="False" />
-            
+
         </StackPanel>
 
-        
-        
-        
-        
-        
+
+
+
+
+
 
         <!--关闭按钮及最大化按钮-->
         <StackPanel
@@ -89,81 +89,117 @@
 
         </StackPanel>
 
-        
-        
-        
+
+
+
         <!--横向菜单栏-->
-        <StackPanel
+
+
+        <Grid
             Grid.Row="1"
-            Orientation="Horizontal"
-            HorizontalAlignment="Left"
-            >
+           >
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="150"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel
+                    Orientation="Horizontal"
+                    Grid.Column="0"
+                >
 
-            <RadioButton
-                x:Name="RB_approve"
-                Style="{StaticResource MaterialDesignTabRadioButton}"
-                Margin="0"
-                IsChecked="True"
-                Content="{DynamicResource ManageMenuApprove}" 
-                Click="RB_approve_OnClick"
-                />
+                    <RadioButton
+                        x:Name="RB_approve"
+                        Style="{StaticResource MaterialDesignTabRadioButton}"
+                        Margin="0"
+                        IsChecked="True"
+                        Content="{DynamicResource ManageMenuApprove}" 
+                        Click="RB_approve_OnClick"
+                    />
 
-            <RadioButton
-                x:Name="RB_AddressManage"
-                Style="{StaticResource MaterialDesignTabRadioButton}"
-                Margin="0"
-                IsChecked="False"
-                Content="{DynamicResource ManageMenuIP}" 
-                Click="RB_AddressManage_Click"
-                />
+                    <RadioButton
+                        x:Name="RB_AddressManage"
+                        Style="{StaticResource MaterialDesignTabRadioButton}"
+                        Margin="0"
+                        IsChecked="False"
+                        Content="{DynamicResource ManageMenuIP}" 
+                        Click="RB_AddressManage_Click"
+                    />
 
-            <RadioButton
-                x:Name="RB_Group"
-                Style="{StaticResource MaterialDesignTabRadioButton}"
-                Margin="0"
-                IsChecked="False"
-                Content="{DynamicResource ManageMenuGroup}" 
-                Click="RB_Group_Click"
-                />
-
-
-
-
-
-            <RadioButton
-                x:Name="RB_User"
-                Style="{StaticResource MaterialDesignTabRadioButton}"
-                Margin="0"
-                IsChecked="False"
-                Content="{DynamicResource ManageMenuUser}" 
-                Click="RB_User_Click"
-                />
+                    <RadioButton
+                        x:Name="RB_Group"
+                        Style="{StaticResource MaterialDesignTabRadioButton}"
+                        Margin="0"
+                        IsChecked="False"
+                        Content="{DynamicResource ManageMenuGroup}" 
+                        Click="RB_Group_Click"
+                    />
 
 
-            <RadioButton
-                x:Name="RB_Org"
-                Style="{StaticResource MaterialDesignTabRadioButton}"
-                Margin="0"
-                IsChecked="False"
-                Content="{DynamicResource ManageMenuOrganization}" 
-                Click="RB_Org_Click"
-            />
 
-            <RadioButton
-                x:Name="RB_About"
-                Style="{StaticResource MaterialDesignTabRadioButton}"
-                Margin="0"
-                IsChecked="False"
-                Content="关于" 
-                Click="RB_About_OnClick"
-            />
 
-        </StackPanel>
-        
-        
-        
-        
-       
+
+                    <RadioButton
+                        x:Name="RB_User"
+                        Style="{StaticResource MaterialDesignTabRadioButton}"
+                        Margin="0"
+                        IsChecked="False"
+                        Content="{DynamicResource ManageMenuUser}" 
+                        Click="RB_User_Click"
+                    />
+
+
+                    <RadioButton
+                        x:Name="RB_Org"
+                        Style="{StaticResource MaterialDesignTabRadioButton}"
+                        Margin="0"
+                        IsChecked="False"
+                        Content="{DynamicResource ManageMenuOrganization}" 
+                        Click="RB_Org_Click"
+                    />
+
+                    <RadioButton
+                        x:Name="RB_About"
+                        Style="{StaticResource MaterialDesignTabRadioButton}"
+                        Margin="0"
+                        IsChecked="False"
+                        Content="关于" 
+                        Click="RB_About_OnClick"
+                    />
+
+
+                </StackPanel>
+
+                <StackPanel
+                    Grid.Column="1"
+                    >
+                    <Button
+                        x:Name="BT_LoginOut"
+                        Grid.Column="1"
+                        Margin="5"
+                        Width="120"
+                        Style="{StaticResource MaterialDesignOutlinedButton}"
+                        Click="BT_LoginOut_OnClick"
+                    >
+
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <md:PackIcon Kind="LoginVariant" VerticalAlignment="Center"/>
+                            <Label Content="登出" />
+                        </StackPanel>
+
+                    </Button>
+
+                </StackPanel>
+
+            </Grid>
+
+
+        </Grid>
+
+
+
+
+
         <!--功能面板-->
         <StackPanel
             x:Name="ManageOptionPlan"
@@ -172,13 +208,13 @@
             VerticalAlignment="Stretch"
             d:Background="Beige"
             >
-            
-            
-            
-            
-            
-            
-            
+
+
+
+
+
+
+
         </StackPanel>
 
 

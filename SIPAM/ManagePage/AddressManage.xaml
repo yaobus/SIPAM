@@ -204,13 +204,14 @@
 
             </GroupBox>
 
+            <Expander
+                Margin="5"
+                IsExpanded="True"
+                HorizontalAlignment="Stretch"
+                Header="掩码位调整"
+                Style="{StaticResource MaterialDesignExpander}"
+            >
 
-
-            <GroupBox
-                    Header="掩码位调整"  
-                    BorderThickness="0"
-                    Foreground="Teal"
-                    Margin="0">
                 <Slider
                     Margin="0,0,0,5"
                     x:Name="MaskSlider"
@@ -222,38 +223,43 @@
                     TickPlacement="Both"  
                     ValueChanged="MaskSlider_ValueChanged" />
 
-            </GroupBox>
+</Expander>
 
-            <GroupBox Header="网段注意事项"  BorderThickness="0">
+    <Expander
+        Margin="5"
+        IsExpanded="True"
+        HorizontalAlignment="Stretch"
+        Header="网段注意事项"
+        Style="{StaticResource MaterialDesignExpander}"
+        >
+    <StackPanel>
 
-                <StackPanel>
-
-                    <TextBox
-                        x:Name="TbAttention"
-                        Margin="0,5,0,5"
-                        VerticalAlignment="Top"
-                        Height="200"
-                        md:HintAssist.Hint="注意事项:"
-                        AcceptsReturn="True"
-                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                        IsEnabled="False"
-                        TextWrapping="Wrap" />
-
-
-
-
-                </StackPanel>
-
-
-            </GroupBox>
-
-            <GroupBox
-                        Margin="0"
-                        BorderThickness="0"
-                        Header="IP地址保留设置">
+        <TextBox
+            x:Name="TbAttention"
+            Margin="0,5,0,5"
+            VerticalAlignment="Top"
+            Height="200"
+            md:HintAssist.Hint="注意事项:"
+            AcceptsReturn="True"
+            Style="{StaticResource MaterialDesignOutlinedTextBox}"
+            IsEnabled="False"
+            TextWrapping="Wrap" />
 
 
 
+
+    </StackPanel>
+
+
+
+</Expander>
+
+<Expander
+    HorizontalAlignment="Stretch"
+    Header="IP地址保留设置"
+    Style="{StaticResource MaterialDesignExpander}"
+Margin="5"
+    >
                 <StackPanel Margin="0" Orientation="Vertical">
 
                     <Grid
@@ -332,13 +338,14 @@
                 </StackPanel>
 
 
+            </Expander>
 
 
-            </GroupBox>
+
 
 
             <Grid 
-                Margin="5,-10,5,5"
+                Margin="5,5,5,5"
                 >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>

@@ -260,6 +260,7 @@
                         Grid.Column="1"
                         Margin="5"
                         Width="120"
+                        Visibility="Hidden"
                         Style="{StaticResource MaterialDesignOutlinedButton}"
                         Click="BT_ApplySegment_Click"
                         >
@@ -281,6 +282,7 @@
                         Grid.Column="1"
                         Margin="5"
                         Width="120"
+                        Visibility="Hidden"
                         Style="{StaticResource MaterialDesignOutlinedButton}"
                         Click="BT_PasswordModify_Click"
                         >
@@ -292,8 +294,22 @@
 
                     </Button>
 
-                
 
+                <Button
+                    x:Name="BT_LoginOut"
+                    Grid.Column="1"
+                    Margin="5"
+                    Width="120"
+                    Style="{StaticResource MaterialDesignOutlinedButton}"
+                    Click="BT_LoginOut_OnClick"
+                >
+
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <md:PackIcon Kind="LoginVariant" VerticalAlignment="Center"/>
+                        <Label Content="登出" />
+                    </StackPanel>
+
+                </Button>
 
             </StackPanel>
 
@@ -656,12 +672,15 @@
             Grid.Column="2"
             HorizontalAlignment="Stretch"
             >
+        <StackPanel>
 
-            <GroupBox 
-               Header="地址申请详细内容填写"  
-               BorderThickness="0"
-               
-               >
+            <Expander
+                Margin="5"
+                IsExpanded="True"
+                HorizontalAlignment="Stretch"
+                Header="IP地址使用人信息填写"
+                Style="{StaticResource MaterialDesignExpander}"
+            >
 
                 <StackPanel>
 
@@ -688,18 +707,7 @@
                     TextWrapping="Wrap" />
 
 
-                    <ComboBox
-                        Margin="0,5"
-                        md:HintAssist.Hint="IP地址用途"
-                        x:Name="CbUseTo"
-                        ItemsSource="{Binding LongListToTestComboVirtualization}"
-                        Style="{StaticResource MaterialDesignOutlinedComboBox}">
-                        <ComboBox.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <VirtualizingStackPanel />
-                            </ItemsPanelTemplate>
-                        </ComboBox.ItemsPanel>
-                    </ComboBox>
+
 
 
 
@@ -750,20 +758,51 @@
                     TextWrapping="Wrap" />
 
 
-                    <ComboBox
-                        x:Name="CbDeviceType"
-                        Margin="0,5"
-                        md:HintAssist.Hint="设备类型"
-                        ItemsSource="{Binding LongListToTestComboVirtualization}"
-                        Style="{StaticResource MaterialDesignOutlinedComboBox}">
-                        <ComboBox.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <VirtualizingStackPanel />
-                            </ItemsPanelTemplate>
-                        </ComboBox.ItemsPanel>
-                    </ComboBox>
 
-                    <TextBox
+                </StackPanel>
+
+            </Expander>
+
+
+            <Expander
+                Margin="5"
+                IsExpanded="True"
+                HorizontalAlignment="Stretch"
+                Header="设备信息填写"
+                Style="{StaticResource MaterialDesignExpander}"
+                >
+
+
+                    <StackPanel>
+
+                        <ComboBox
+                            Margin="0,5"
+                            md:HintAssist.Hint="IP地址用途"
+                            x:Name="CbUseTo"
+                            ItemsSource="{Binding LongListToTestComboVirtualization}"
+                            Style="{StaticResource MaterialDesignOutlinedComboBox}">
+                            <ComboBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <VirtualizingStackPanel />
+                                </ItemsPanelTemplate>
+                            </ComboBox.ItemsPanel>
+                        </ComboBox>
+
+                        <ComboBox
+                            x:Name="CbDeviceType"
+                            Margin="0,5"
+                            md:HintAssist.Hint="设备类型"
+                            ItemsSource="{Binding LongListToTestComboVirtualization}"
+                            Style="{StaticResource MaterialDesignOutlinedComboBox}">
+                            <ComboBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <VirtualizingStackPanel />
+                                </ItemsPanelTemplate>
+                            </ComboBox.ItemsPanel>
+                        </ComboBox>
+
+
+                        <TextBox
                     x:Name="IpUserModel"
                     Margin="0,5"
                     
@@ -773,7 +812,7 @@
                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
                     TextWrapping="Wrap" />
 
-                    <TextBox
+                        <TextBox
                     x:Name="IpUserModelMac"
                     Margin="0,5"
                     
@@ -784,7 +823,7 @@
                     TextWrapping="Wrap" />
 
 
-                    <TextBox
+                        <TextBox
                     x:Name="IpDeviceAddress"
                     Margin="0,5"
                     VerticalAlignment="Top"
@@ -797,7 +836,7 @@
 
 
 
-                    <Button
+                        <Button
                         x:Name="BT_ApplyIP"
                         Grid.Column="1"
                         Margin="0,5"
@@ -807,40 +846,19 @@
                         Click="BT_ApplyIP_Click"
                         >
 
-                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                            <md:PackIcon Kind="Ip" VerticalAlignment="Center"/>
-                            <Label Content="提交申请" />
-                        </StackPanel>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <md:PackIcon Kind="Ip" VerticalAlignment="Center"/>
+                                <Label Content="提交申请" />
+                            </StackPanel>
 
-                    </Button>
-
-
-
-
-
-                </StackPanel>
-                
-                
+                        </Button>
+                    </StackPanel>
 
 
 
+            </Expander>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            </GroupBox>
+</StackPanel>
         </Grid>
 
 
