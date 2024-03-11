@@ -48,7 +48,7 @@ namespace SIPAM
                 }
                 catch (Exception exception)
                 {
-                    //Console.WriteLine(exception);
+                    Console.WriteLine(exception);
                     //throw;
                 }
             }

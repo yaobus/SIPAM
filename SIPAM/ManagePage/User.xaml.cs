@@ -66,15 +66,14 @@ namespace SIPAM.ManagePage
 
 
 
+                //CbDepartment.SelectedIndex = GetValueKey(userInfos[UserListView.SelectedIndex].Department, departmentDictionary) +1;
+
+                CbDepartment.Text = userInfos[UserListView.SelectedIndex].Department;
 
 
-                CbDepartment.SelectedIndex = GetValueKey(userInfos[UserListView.SelectedIndex].Department, departmentDictionary) - 1;
 
 
-
-
-
-                TbTel.Text = userInfos[UserListView.SelectedIndex].Tel;
+				TbTel.Text = userInfos[UserListView.SelectedIndex].Tel;
                 TbPhone.Text = userInfos[UserListView.SelectedIndex].Phone;
 
 

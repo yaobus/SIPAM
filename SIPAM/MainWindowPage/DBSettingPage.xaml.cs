@@ -146,7 +146,7 @@ namespace SIPAM.MainWindowPage
             }
             else
             {
-                MessageBox.Show("Null database info");
+                MessageBox.Show("未发现数据库配置文件！\r 点击“确定”立刻配置数据库!","数据库配置文件不存在",MessageBoxButton.OK,MessageBoxImage.Warning);
             }
 
 
@@ -234,8 +234,9 @@ namespace SIPAM.MainWindowPage
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("数据库连接失败!请检查数据库配置");
-                }
+
+                    MessageBox.Show("数据库连接失败!请检查数据库配置！", "数据库连接失败!", MessageBoxButton.OK, MessageBoxImage.Warning);
+				}
 
             }
 
@@ -298,11 +299,10 @@ namespace SIPAM.MainWindowPage
                 Console.WriteLine("初始数据装载完毕!");
             }
 
+            MessageBox.Show("初始表单创建完毕，请返回登录页面！", "完成", MessageBoxButton.OK, MessageBoxImage.Information);
 
-            MessageBox.Show("初始表单创建完毕，请返回登录页面！");
-
-            // LoadBar.Visibility = Visibility.Hidden;
-        }
+			// LoadBar.Visibility = Visibility.Hidden;
+		}
 
 
 

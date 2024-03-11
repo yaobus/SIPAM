@@ -19,7 +19,7 @@
                     Width="400"   
                     Margin="5"
                     x:Name="UserNameBox"
-                    Text=""
+                    Text="admin"
                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
                     VerticalAlignment="Top"
                     AcceptsReturn="False"
@@ -32,7 +32,7 @@
                     x:Name="UserPasswordBox"
                     Style="{StaticResource MaterialDesignOutlinedPasswordBox}"
                     VerticalAlignment="Top"
-                    Password=""
+                    Password="Admin@123"
                     KeyDown="UserPasswordBox_OnKeyDown"
                     md:HintAssist.Hint="{DynamicResource LoginPW}" />
 
