@@ -305,5 +305,10 @@ namespace SIPAM.ManagePage
 
         }
 
+
+        private void Approve_OnSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+			YLine.Width = SystemParameters.WorkArea.Size.Height - 60;
+		}
     }
 }

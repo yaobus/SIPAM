@@ -66,18 +66,25 @@ namespace SIPAM
 
 
 
+	        // 获取屏幕的工作区大小
+	        double screenWidth = SystemParameters.WorkArea.Width;
+	        double screenHeight = SystemParameters.WorkArea.Height;
 
-            // 获取桌面工作区域大小
-            double workAreaWidth = SystemParameters.WorkArea.Width;
-            double workAreaHeight = SystemParameters.WorkArea.Height;
+	        // 获取任务栏的高度
+	        double taskbarHeight = SystemParameters.PrimaryScreenHeight - SystemParameters.WorkArea.Height;
 
-            // 将窗口大小设置为工作区域大小
-            this.Width = workAreaWidth;
-            this.Height = workAreaHeight;
-            this.Left = SystemParameters.WorkArea.Left;
-            this.Top = SystemParameters.WorkArea.Top;
+	        // 设置窗口样式为无边框
+	        WindowStyle = WindowStyle.None;
 
-        }
+	        // 设置窗口大小为屏幕的宽度，高度为屏幕工作区的高度减去任务栏的高度
+	        Width = screenWidth;
+	        Height = screenHeight - taskbarHeight;
+
+	        // 设置窗口位置为屏幕的左上角
+	        Left = 0;
+	        Top = 0;
+
+		}
 
 
         /// <summary>
@@ -90,6 +97,10 @@ namespace SIPAM
            // this.WindowState=WindowState.Maximized;
             ManageOptionPlan.Children.Clear();
             ManageOptionPlan.Children.Add(new ManagePage.Approve());
+            
+
+
+
         }
 
 

@@ -61,12 +61,12 @@ namespace SIPAM.Properties {
         }
         
         /// <summary>
-        ///   查找 System.Byte[] 类型的本地化资源。
+        ///   查找类似于 (图标) 的 System.Drawing.Icon 类型的本地化资源。
         /// </summary>
-        internal static byte[] dbsx {
+        internal static System.Drawing.Icon ICON {
             get {
-                object obj = ResourceManager.GetObject("dbsx", resourceCulture);
-                return ((byte[])(obj));
+                object obj = ResourceManager.GetObject("ICON", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
             }
         }
     }

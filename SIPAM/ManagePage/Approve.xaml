@@ -3,13 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:svg="http://sharpvectors.codeplex.com/svgc/"
              xmlns:local="clr-namespace:SIPAM.ManagePage"
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:Background="AliceBlue"
-             d:DesignHeight="768" d:DesignWidth="1200"
+             FontSize="20"
+             d:DesignHeight="768" 
+             d:DesignWidth="1366"
+             d:VerticalAlignment="Stretch"
              Loaded="Approve_OnLoaded"
+             SizeChanged="Approve_OnSizeChanged"
              >
     <Grid>
         <Grid.ColumnDefinitions>
@@ -17,6 +20,25 @@
             <ColumnDefinition Width="*"/>
 
         </Grid.ColumnDefinitions>
+
+
+        <!--纵向分隔条-->
+        <DockPanel
+            
+            Grid.Row="0"
+            HorizontalAlignment="Right"
+        >
+
+            <ProgressBar
+                x:Name="YLine"
+                Orientation="Vertical"
+                Height="3"
+                IsIndeterminate="False" 
+
+            />
+
+
+        </DockPanel>
 
         <GroupBox
             Header="申请详情"  

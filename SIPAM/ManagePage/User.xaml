@@ -8,7 +8,8 @@
              mc:Ignorable="d" 
              d:Background="AliceBlue"
              FontSize="20"
-             d:DesignHeight="1000" d:DesignWidth="1600"
+             d:DesignHeight="768" 
+             d:DesignWidth="1366"
              d:VerticalAlignment="Stretch" 
              SizeChanged="UserControl_SizeChanged"
              Loaded="User_OnLoaded"
@@ -17,7 +18,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="300"/>
             <ColumnDefinition Width="800*"/>
-            <!--<ColumnDefinition Width="300*"/>-->
+            
         </Grid.ColumnDefinitions>
 
         <!--纵向分隔条-->
@@ -38,23 +39,6 @@
 
         </DockPanel>
 
-        <!--纵向分隔条2-->
-        <DockPanel
-            
-            Grid.Column="1"
-            HorizontalAlignment="Right"
-            >
-
-            <ProgressBar
-               x:Name="YLine2"
-               Orientation="Vertical"
-               Height="3"
-               IsIndeterminate="False" 
-
-               />
-
-
-        </DockPanel>
 
 
         <!--用户信息管理-->
