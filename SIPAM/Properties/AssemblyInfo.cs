@@ -8,9 +8,9 @@ using System.Windows;
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
 [assembly: AssemblyTitle("SIPAM")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("SIPAM-简单IP地址分配管理系统")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("642390042@qq.com")]
 [assembly: AssemblyProduct("SIPAM")]
 [assembly: AssemblyCopyright("Copyright ©  2023")]
 [assembly: AssemblyTrademark("")]
