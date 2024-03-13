@@ -140,12 +140,10 @@ namespace SIPAM.ManagePage
 
                 string useTo = "";
                 string userDepartment = "";
-
                 string email = "";
                 string userTel = "";
                 string phoneNumber = "";
                 string deviceType = "";
-
                 string deviceModel = "";
                 string deviceMac = "";
                 string deviceAddress = "";

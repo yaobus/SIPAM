@@ -164,5 +164,13 @@ namespace SIPAM
 	        ApplyOptionPlan.Children.Clear();
 	        ApplyOptionPlan.Children.Add(new ManagePage.About());
 		}
+
+
+
+        private void RbMyAddress_OnClick(object sender, RoutedEventArgs e)
+        {
+			ApplyOptionPlan.Children.Clear();
+			ApplyOptionPlan.Children.Add(new UserPage.MyAddress());
+		}
     }
 }

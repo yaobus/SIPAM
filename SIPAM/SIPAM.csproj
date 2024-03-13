@@ -166,6 +166,9 @@
     <Compile Include="UserPage\ApplyPage.xaml.cs">
       <DependentUpon>ApplyPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserPage\MyAddress.xaml.cs">
+      <DependentUpon>MyAddress.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModes\ViewModes.cs" />
     <Compile Include="Windows\ChangePasswordWindow.xaml.cs">
       <DependentUpon>ChangePasswordWindow.xaml</DependentUpon>
@@ -234,6 +237,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserPage\ApplyPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserPage\MyAddress.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

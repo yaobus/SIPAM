@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="SIPAM.UserPage.MyAddress"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SIPAM.UserPage"
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:Background="AliceBlue"
+             FontSize="20"
+             d:Height="768"
+             d:Width="1366"
+             Loaded="MyAddress_OnLoaded"
+             >
+    <Grid>
+        <ListView
+            x:Name="MyAddressListView"
+            >
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn
+                        DisplayMemberBinding="{Binding Index}"
+                        Header="序号" />
+                    <GridViewColumn
+                        DisplayMemberBinding="{Binding Network}"
+                        Header="网段" />
+                    <GridViewColumn
+                        DisplayMemberBinding="{Binding Address}"
+                        Header="地址" />
+                    <GridViewColumn
+                        DisplayMemberBinding="{Binding ApplyUser}"
+                        Header="申请人" />
+                    <GridViewColumn
+                        DisplayMemberBinding="{Binding Description}"
+                        Header="使用人" />
+                    <GridViewColumn
+                        DisplayMemberBinding="{Binding UserDepartment}"
+                        Header="使用人部门" />
+                    <GridViewColumn
+                        DisplayMemberBinding="{Binding UserPhone}"
+                        Header="使用人电话" />
+                    <GridViewColumn
+                        DisplayMemberBinding="{Binding DeviceAddress}"
+                        Header="设备位置" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+
+
+    </Grid>
+</UserControl>

@@ -49,13 +49,13 @@ namespace SIPAM.ManagePage
 
 
         ObservableCollection<ApproveInfo> approveInfos = new ObservableCollection<ApproveInfo>();
-        
 
+		ObservableCollection<ApproveInfo> approveInfosTemp = new ObservableCollection<ApproveInfo>();
 
-        /// <summary>
-        /// 加载申请信息列表
-        /// </summary>
-        private void LoadApproveInfos()
+		/// <summary>
+		/// 加载申请信息列表
+		/// </summary>
+		private void LoadApproveInfos()
         {
             approveInfos.Clear();
 
@@ -110,7 +110,7 @@ namespace SIPAM.ManagePage
                 //要批准的IP地址
                 List<string> ipList = StatisticsIp(TbApplyIp.Text);
                 
-                LockIp(ipList);
+                UpdateIpStatus(ipList);
 
 
             }
@@ -125,15 +125,16 @@ namespace SIPAM.ManagePage
         /// 分配IP地址(锁定)，更新LOG
         /// </summary>
         /// <param name="ipList"></param>
-        private void LockIp(List<string> ipList)
+        private void UpdateIpStatus(List<string> ipList)
         {
             string tableName = approveInfos[ApproveListView.SelectedIndex].TableName;
 
             for (int i = 0; i < ipList.Count; i++)
             {
                 if (!string.IsNullOrWhiteSpace(ipList[i]))
-                {
-                    string sql = string.Format("UPDATE `{0}` SET `AddressStatus` = 4 WHERE `Address` = {1}", tableName, ipList[i]);
+				{  
+					//Description 记录IP地址使用人
+					string sql = string.Format("UPDATE `{0}` SET `AddressStatus` = 4 , `ApplyUser` = '{1}', `Description` = '{2}' , `UserDepartment` = '{3}' , `PhoneNumber` = '{4}' , `DeviceAddress` = '{5}', `RatifyTime` = '{6}' WHERE `Address` = {7}", tableName, approveInfosTemp[0].ApplyUser, approveInfosTemp[0].UserName, approveInfosTemp[0].UserDepartment, approveInfosTemp[0].UserPhone, approveInfosTemp[0].DeviceAddress,DateTime.Now, ipList[i]);
 
 
                     DbClass.ExecuteSql(sql);
@@ -250,8 +251,12 @@ namespace SIPAM.ManagePage
                 ApproveButton.Visibility = Visibility.Visible;
 
                 RejectButton.Visibility= Visibility.Visible;
+                approveInfosTemp.Clear();
 
-                TbApplyUser.Text = approveInfos[ApproveListView.SelectedIndex].ApplyUser;
+                approveInfosTemp.Add(approveInfos[ApproveListView.SelectedIndex]); 
+
+
+				TbApplyUser.Text = approveInfos[ApproveListView.SelectedIndex].ApplyUser;
                 TbApplyNetwork.Text = approveInfos[ApproveListView.SelectedIndex].ApplyNetwork;
                 TbApplyIp.Text = approveInfos[ApproveListView.SelectedIndex].ApplyIp;
                 UserName.Text = approveInfos[ApproveListView.SelectedIndex].UserName;
@@ -259,7 +264,6 @@ namespace SIPAM.ManagePage
                 TbPhone.Text = approveInfos[ApproveListView.SelectedIndex].UserPhone;
                 TbDeviceType.Text = approveInfos[ApproveListView.SelectedIndex].DeviceType;
                 TbDeviceAddress.Text = approveInfos[ApproveListView.SelectedIndex].DeviceAddress;
-
                 TbIpNumber.Text = GetIpCount(TbApplyIp.Text).ToString();
 
 

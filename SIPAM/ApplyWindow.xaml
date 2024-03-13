@@ -193,9 +193,9 @@
                         Style="{StaticResource MaterialDesignTabRadioButton}"
                         Margin="0"
                         IsChecked="False"
-                        IsEnabled="False"
-                        Content="我的地址" 
                         
+                        Content="我的地址" 
+                        Click="RbMyAddress_OnClick"
                     />
 
                     <RadioButton
