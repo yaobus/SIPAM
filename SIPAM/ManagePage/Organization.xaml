@@ -198,14 +198,10 @@
 
 
 
-            <Grid 
-                Margin="5" Cursor=""
+            <StackPanel
+                Margin="5" 
                 >
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
 
-                </Grid.RowDefinitions>
                 <Button
                     x:Name="AddButton"
                     Grid.Row="0"
@@ -222,6 +218,23 @@
 
                 </Button>
 
+                <Button
+                    x:Name="EditButton"
+                    Grid.Row="0"
+                    Margin="5"
+                    d:IsHidden="false"
+                    Visibility="Collapsed"
+                    
+                    Style="{StaticResource MaterialDesignOutlinedButton}"
+                    Click="EditButton_OnClick"
+                >
+
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <md:PackIcon Kind="EditBox" VerticalAlignment="Center"/>
+                        <Label Content="修改部门" />
+                    </StackPanel>
+
+                </Button>
 
                 <StackPanel
                 Grid.Row="1"
@@ -270,7 +283,7 @@
 
 
 
-            </Grid>
+            </StackPanel>
 
         </StackPanel>
 

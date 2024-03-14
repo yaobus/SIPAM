@@ -1,4 +1,5 @@
-﻿using MySqlConnector;
+﻿using ControlzEx.Standard;
+using MySqlConnector;
 using SIPAM.DbOperation;
 using System;
 using System.Collections.Generic;
@@ -67,8 +68,16 @@ namespace SIPAM.ManagePage
             if (index != -1)
             {
                  SelectDepartment = departmentInfos[index].Department;
+                 
                  DelButton.Visibility = Visibility.Visible;
+                 EditButton.Visibility = Visibility.Visible;
+
+                 GroupTextBox.Text = departmentInfos[OrgListView.SelectedIndex].Department;
+                 DescriptionText.Text = departmentInfos[OrgListView.SelectedIndex].Description;
             }
+
+            
+
 
 
 
@@ -90,7 +99,9 @@ namespace SIPAM.ManagePage
             GroupTextBox.IsEnabled = true;
             DescriptionText.IsEnabled = true;
             SaveButton.Visibility = Visibility.Visible;
-
+            
+            //0新增部门，1编辑部门
+            EditStatus = 0;
 
         }
 
@@ -98,41 +109,75 @@ namespace SIPAM.ManagePage
 
         private void SaveButton_OnClick(object sender, RoutedEventArgs e)
         {
-            if (GroupTextBox.Text != "" && DescriptionText.Text != "")
-            {
-                string sqlTemp = string.Format("SELECT COUNT(*) FROM department WHERE department ='{0}'",GroupTextBox.Text);
+            //新增
+			if (EditStatus == 0)
+			{
+				if (GroupTextBox.Text != "" && DescriptionText.Text != "")
+				{
+					string sqlTemp = string.Format("SELECT COUNT(*) FROM department WHERE department ='{0}' AND status = '0'", GroupTextBox.Text);
 
-                int x = DbClass.ExecuteScalarTableNum(sqlTemp);
+					int x = DbClass.ExecuteScalarTableNum(sqlTemp);
 
-                if (x == 0)
-                {
-                    int num = DbClass.ExecuteScalarTableNum("SELECT COUNT(*) FROM department");
-
-
-                    string sql = string.Format("INSERT INTO `department` (`id`, `department`, `description`, `creator`, `date`, `status`) VALUES ({0}, '{1}', '{2}', '{3}', '{4}', '0')", num + 1, GroupTextBox.Text, DescriptionText.Text, GlobalVariable.Variable.UserInfo.User, DateTime.Now);
-
-                    DbClass.ModifySql(sql);
-
-                    LoadDepartmentData();
-
-                    SaveButton.Visibility = Visibility.Collapsed;
-                    GroupTextBox.IsEnabled = false;
-                    DescriptionText.IsEnabled = false;
-                }
-                else
-                {
-
-                    MessageBox.Show("名称已存在，请勿重复添加！", "重复", MessageBoxButton.OK, MessageBoxImage.Information);
-
-                }
+					if (x == 0)
+					{
+						int num = DbClass.ExecuteScalarTableNum("SELECT COUNT(*) FROM department");
 
 
+						string sql = string.Format("INSERT INTO `department` (`id`, `department`, `description`, `creator`, `date`, `status`) VALUES ({0}, '{1}', '{2}', '{3}', '{4}', '0')", num + 1, GroupTextBox.Text, DescriptionText.Text, GlobalVariable.Variable.UserInfo.User, DateTime.Now);
 
-            }
-            else
-            {
-                MessageBox.Show("请完整填写部门信息！", "确定", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
+						DbClass.ModifySql(sql);
+
+						LoadDepartmentData();
+
+						SaveButton.Visibility = Visibility.Collapsed;
+						GroupTextBox.IsEnabled = false;
+						DescriptionText.IsEnabled = false;
+					}
+					else
+					{
+
+						MessageBox.Show("名称已存在，请勿重复添加！", "重复", MessageBoxButton.OK, MessageBoxImage.Information);
+
+					}
+
+
+
+				}
+				else
+				{
+					MessageBox.Show("请完整填写部门信息！", "确定", MessageBoxButton.OK, MessageBoxImage.Information);
+				}
+			}
+            
+			else//编辑
+			{
+				if (GroupTextBox.Text != "" && DescriptionText.Text != "")
+				{
+					string sql = string.Format("UPDATE `department` SET `department` = '{0}',`description`='{1}' WHERE `department` = '{2}' AND `description` ='{3}'", GroupTextBox.Text,DescriptionText.Text, departmentInfos[OrgListView.SelectedIndex].Department, departmentInfos[OrgListView.SelectedIndex].Description);
+
+					Console.WriteLine(sql);
+
+					DbClass.ModifySql(sql);
+
+					LoadDepartmentData();
+
+					SaveButton.Visibility = Visibility.Collapsed;
+					EditButton.Visibility = Visibility.Collapsed;
+					GroupTextBox.IsEnabled = false;
+					DescriptionText.IsEnabled = false;
+
+
+				}
+				else
+				{
+					MessageBox.Show("请完整填写部门信息！", "确定", MessageBoxButton.OK, MessageBoxImage.Information);
+				}
+			}
+
+
+
+
+
 
 
         }
@@ -140,6 +185,7 @@ namespace SIPAM.ManagePage
 
         ObservableCollection<DepartmentInfo> departmentInfos = new ObservableCollection<DepartmentInfo>();
 
+        private int EditStatus;
 
         /// <summary>
         /// 从数据库获取部门信息
@@ -148,21 +194,20 @@ namespace SIPAM.ManagePage
         {
             departmentInfos.Clear();
 
-            //查询IP段信息
-            string sql = "SELECT * FROM department WHERE status!=1";
+			//查询IP段信息
+			string sql = "SELECT * FROM department WHERE status!=1";
 
-            MySqlDataReader reader = DbClass.CarrySqlCmd(sql);
+			MySqlDataReader reader = DbClass.CarrySqlCmd(sql);
 
-
+			int id = 0;
             while (reader.Read())
             {
-                int id = reader.GetInt32("id");
+	            id++;
                 string department = reader.GetString("department");
                 string description = reader.GetString("description");
                 string network = DbClass.GetReaderString(reader, "network");
                 string creator = reader.GetString("creator");
                 DateTime date = reader.GetDateTime("date");
-
 
 
                 departmentInfos.Add(new DepartmentInfo(id, department, description, network, creator, date));
@@ -192,12 +237,31 @@ namespace SIPAM.ManagePage
 
             if (result == MessageBoxResult.OK)
             {
-                string sql = string.Format("DELETE FROM `department` WHERE `department` = '{0}'", SelectDepartment);
+                string sql = string.Format("UPDATE `department` SET `Status` = 1 WHERE `department` = '{0}'", SelectDepartment);
                 DbClass.ModifySql(sql);
                 LoadDepartmentData();
                 SaveButton.Visibility = Visibility.Collapsed;
 
             }
+        }
+
+
+        /// <summary>
+        /// 修改部门
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void EditButton_OnClick(object sender, RoutedEventArgs e)
+		{
+			//0新增部门，1编辑部门
+			EditStatus = 1;
+            GroupTextBox.IsEnabled=true;
+            DescriptionText.IsEnabled=true;
+            SaveButton.Visibility=Visibility.Visible;
+
+
+
+	        
         }
     }
 }

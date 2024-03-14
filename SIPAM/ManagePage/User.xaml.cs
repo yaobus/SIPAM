@@ -40,9 +40,9 @@ namespace SIPAM.ManagePage
         {
             UserListView.ItemsSource = userInfos;
             CbGroup.ItemsSource = groupList;
-            CbDepartment.ItemsSource = departmentList;
+            //CbDepartment.ItemsSource = departmentList;
 
-            LoadDepartment();
+           // LoadDepartment();
 
             LoadGroupData();
 
@@ -63,12 +63,12 @@ namespace SIPAM.ManagePage
                 CbGroup.IsEnabled = true;
                 TbUser.Text = userInfos[UserListView.SelectedIndex].User;
                 TbName.Text = userInfos[UserListView.SelectedIndex].Name;
+                CbDepartment.Text= userInfos[UserListView.SelectedIndex].Department;
 
 
+				//CbDepartment.SelectedIndex = GetValueKey(userInfos[UserListView.SelectedIndex].Department, departmentDictionary) +1;
 
-                //CbDepartment.SelectedIndex = GetValueKey(userInfos[UserListView.SelectedIndex].Department, departmentDictionary) +1;
-
-                CbDepartment.Text = userInfos[UserListView.SelectedIndex].Department;
+				
 
 
 
