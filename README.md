@@ -1,5 +1,9 @@
 # SIPAM  
 
+需要sqlite单用户本地版的请移步IPAM-NOTE项目
+
+https://github.com/yaobus/IPAM-NOTE.git
+
 一、前言
 
 SIPAM主要用于解决工作中需要对多个网段的IP地址进行分配的工作  
