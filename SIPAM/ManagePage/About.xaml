@@ -45,9 +45,7 @@
                       VerticalAlignment="Center"
                       >
                    
-                      <TextBlock
-                        Style="{StaticResource MaterialDesignHeadline4TextBlock}"
-                        Text="最好不要联系我: 642390042@qq.com" />
+
 
 
                   
