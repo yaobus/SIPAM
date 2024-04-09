@@ -75,7 +75,7 @@
                         TextWrapping="NoWrap" />
 
 
-                    <ComboBox
+                    <!--<ComboBox
                         x:Name="CbDepartment"
                         Margin="0,5,0,5"
                         Style="{StaticResource MaterialDesignOutlinedComboBox}"
@@ -92,9 +92,18 @@
                                   UpdateSourceTrigger="PropertyChanged">
                                   </Binding>
                         </ComboBox.SelectedItem>
-                    </ComboBox>
+                    </ComboBox>-->
 
-
+                    <TextBox
+                        x:Name="CbDepartment"  
+                        Margin="0,5,0,5"
+                        Text=""
+                        VerticalAlignment="Top"
+                        md:HintAssist.Hint="所属部门"
+                        AcceptsReturn="True"
+                        IsEnabled="False"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                        TextWrapping="Wrap" />
 
 
                     <TextBox
