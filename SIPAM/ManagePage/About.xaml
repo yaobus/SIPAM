@@ -46,8 +46,9 @@
                       >
                    
                       <TextBlock
-                        Style="{StaticResource MaterialDesignHeadline4TextBlock}"
-                        Text="最好不要联系我: 642390042@qq.com" />
+                          MouseDown="UIElement_OnMouseDown"
+                          Style="{StaticResource MaterialDesignHeadline4TextBlock}"
+                          Text="本地版: https://github.com/yaobus/IPAM-NOTE" />
 
 
                   
