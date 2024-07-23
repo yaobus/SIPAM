@@ -46,8 +46,11 @@
                       >
                    
                       <TextBlock
+                          x:Name="IpamNoteTextBlock"
                         Style="{StaticResource MaterialDesignHeadline4TextBlock}"
-                        Text="最好不要联系我: 642390042@qq.com" />
+                        Text="最好不要联系我: 642390042@qq.com" 
+                          MouseDown="IpamNoteTextBlock_OnMouseDown"
+                          />
 
 
                   

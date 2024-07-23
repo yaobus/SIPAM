@@ -32,5 +32,10 @@ namespace SIPAM.ManagePage
         {
             Process.Start("https://github.com/yaobus/SIPAM.git");
         }
+
+        private void IpamNoteTextBlock_OnMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Process.Start("https://github.com/yaobus/IPAM-NOTE");
+        }
     }
 }
