@@ -27,7 +27,7 @@
               <TextBlock
                   Margin="0,10"
                   Style="{StaticResource MaterialDesignHeadline4TextBlock}"
-                  Text="软件版本号：Ver1.05-Beta" />
+                  Text="软件版本号：Ver1.06-Beta" />
 
               <TextBlock
                   Margin="0,10"

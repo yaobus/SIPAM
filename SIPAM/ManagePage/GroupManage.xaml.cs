@@ -153,7 +153,7 @@ namespace SIPAM.ManagePage
                 if (GroupTextBox.Text != "" && DescriptionTextBox.Text != "")
                 {
                     //先查询该名称的群组是否存在,=1则存在
-                    string sql = string.Format("SELECT COUNT(*) FROM groups WHERE `group` = '{0}'", GroupTextBox.Text);
+                    string sql = string.Format("SELECT COUNT(*) FROM `groups` WHERE `group` = '{0}'", GroupTextBox.Text);
 
                     int num = DbClass.ExecuteScalarTableNum(sql);
 
@@ -161,14 +161,14 @@ namespace SIPAM.ManagePage
                     if (num == 0)
                     {
 
-                        string sql2 = "SELECT COUNT(*) FROM groups";
+                        string sql2 = "SELECT COUNT(*) FROM `groups`";
 
                         //查询现有共有多少个群组
                         int num2 = DbClass.ExecuteScalarTableNum(sql2);
 
 
                         //插入新的群组信息
-                        string sql3 = string.Format("INSERT INTO groups (id，`group`,description,authority,creator,date,status) VALUES ('{0}','{1}','{2}','{3}','{4}','{5}',{6})", num2 + 1, GroupTextBox.Text, DescriptionTextBox.Text, "100000000", Variable.UserInfo.User, DateTime.Now, 0);
+                        string sql3 = string.Format("INSERT INTO `groups` (id，`group`,description,authority,creator,date,status) VALUES ('{0}','{1}','{2}','{3}','{4}','{5}',{6})", num2 + 1, GroupTextBox.Text, DescriptionTextBox.Text, "100000000", Variable.UserInfo.User, DateTime.Now, 0);
                         //Console.WriteLine(sql3);
                         DbClass.ModifySql(sql3);
 
@@ -208,7 +208,7 @@ namespace SIPAM.ManagePage
                 if (GroupTextBox.Text != "" && DescriptionTextBox.Text != "")
                 {
                     //先查询该名称的群组是否存在,小于或等于1则正常，大于1则和其他群组名称冲突
-                    string sql = string.Format("SELECT COUNT(*) FROM groups WHERE `group` = '{0}'", GroupTextBox.Text);
+                    string sql = string.Format("SELECT COUNT(*) FROM `groups` WHERE `group` = '{0}'", GroupTextBox.Text);
 
                     int num = DbClass.ExecuteScalarTableNum(sql);
 
@@ -221,7 +221,7 @@ namespace SIPAM.ManagePage
 
                         //TODO
                         //更新群组信息
-                        string sql3 = string.Format("UPDATE groups SET `group`='{0}',description='{1}' WHERE id={2}", GroupTextBox.Text,DescriptionTextBox.Text,groupId);
+                        string sql3 = string.Format("UPDATE `groups` SET `group`='{0}',description='{1}' WHERE id={2}", GroupTextBox.Text,DescriptionTextBox.Text,groupId);
                         Console.WriteLine(sql3);
                         DbClass.ModifySql(sql3);
 
@@ -305,7 +305,7 @@ namespace SIPAM.ManagePage
 
 
             //查询群组
-            string sql = "SELECT * FROM groups WHERE status!=1";
+            string sql = "SELECT * FROM `groups` WHERE status!=1";
 
 
 

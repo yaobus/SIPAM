@@ -209,7 +209,7 @@ namespace SIPAM.ManagePage
 
 
             //查询群组
-            string sql = "SELECT * FROM groups WHERE status!=1";
+            string sql = "SELECT * FROM `groups` WHERE status!=1";
 
 
 

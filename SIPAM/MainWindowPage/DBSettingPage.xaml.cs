@@ -351,15 +351,15 @@ namespace SIPAM.MainWindowPage
 
             //装载用户群组初始数据
             //管理员
-            string sql = string.Format("INSERT INTO groups (id，`group`,description,authority,creator,date,status) VALUES ('{0}','{1}','{2}','{3}','{4}','{5}',{6})", 1, "admin", "管理员用户组", "111111111", "system", DateTime.Now, 0);
+            string sql = string.Format("INSERT INTO `groups` (id，`group`,description,authority,creator,date,status) VALUES ('{0}','{1}','{2}','{3}','{4}','{5}',{6})", 1, "admin", "管理员用户组", "111111111", "system", DateTime.Now, 0);
             DbClass.ModifySql(sql);
 
             //游客
-             sql = string.Format("INSERT INTO groups (id，`group`,description,authority,creator,date,status) VALUES ('{0}','{1}','{2}','{3}','{4}','{5}',{6})", 2, "guest", "已注册待审核用户组", "100000000", "system", DateTime.Now, 0);
+             sql = string.Format("INSERT INTO `groups` (id，`group`,description,authority,creator,date,status) VALUES ('{0}','{1}','{2}','{3}','{4}','{5}',{6})", 2, "guest", "已注册待审核用户组", "100000000", "system", DateTime.Now, 0);
              DbClass.ModifySql(sql);
 
             //普通用户组
-            sql = string.Format("INSERT INTO groups (id，`group`,description,authority,creator,date,status) VALUES ('{0}','{1}','{2}','{3}','{4}','{5}',{6})", 3, "user", "一般用户组", "100000000", "system", DateTime.Now, 0);
+            sql = string.Format("INSERT INTO `groups` (id，`group`,description,authority,creator,date,status) VALUES ('{0}','{1}','{2}','{3}','{4}','{5}',{6})", 3, "user", "一般用户组", "100000000", "system", DateTime.Now, 0);
             DbClass.ModifySql(sql);
 
 
