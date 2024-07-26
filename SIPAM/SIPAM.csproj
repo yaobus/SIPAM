@@ -153,6 +153,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DbOperation\DbClass.cs" />
+    <Compile Include="DbOperation\MySqlKeepAlive.cs" />
     <Compile Include="EncryptionDecryptionFunction\MD5EncryptionDecryption.cs" />
     <Compile Include="GlobalFunction\DbConfigOperate.cs" />
     <Compile Include="GlobalFunction\IpAddressConvert.cs" />

@@ -44,7 +44,7 @@ namespace SIPAM.DbOperation
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                throw;
+                //throw;
             }
 
 

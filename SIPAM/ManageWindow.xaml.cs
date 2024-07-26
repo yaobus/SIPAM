@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SIPAM.DbOperation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -97,8 +98,8 @@ namespace SIPAM
            // this.WindowState=WindowState.Maximized;
             ManageOptionPlan.Children.Clear();
             ManageOptionPlan.Children.Add(new ManagePage.Approve());
-            
 
+            MySqlKeepAlive.Start();
 
 
         }

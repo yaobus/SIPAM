@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using SIPAM.DbOperation;
 
 namespace SIPAM
 {
@@ -13,5 +14,6 @@ namespace SIPAM
     /// </summary>
     public partial class App : Application
     {
+       
     }
 }
