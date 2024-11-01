@@ -43,7 +43,7 @@ namespace SIPAM
             TbDepartment.Text = Variable.UserInfo.Department;
             //SelectIpUser.Text = TbUser.Text;
             TbGroup.Text = Variable.UserInfo.Group;
-
+            MySqlKeepAlive.Start();
             RbApply_OnClick(null, null);
 
 
