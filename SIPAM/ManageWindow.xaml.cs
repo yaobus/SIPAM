@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using SIPAM.ManagePage;
 
 namespace SIPAM
 {
@@ -114,7 +115,9 @@ namespace SIPAM
         private void RB_AddressManage_Click(object sender, RoutedEventArgs e)
         {
             ManageOptionPlan.Children.Clear();
-            ManageOptionPlan.Children.Add(new ManagePage.AddressManage());
+            AddressManage addressManage = new AddressManage();
+            addressManage.Style = (Style)FindResource("AddressManageStyle");
+            ManageOptionPlan.Children.Add(addressManage);
         }
 
 
@@ -122,6 +125,16 @@ namespace SIPAM
 
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
+
+            foreach (UIElement child in ManageOptionPlan.Children)
+            {
+                if (child is FrameworkElement frameworkElement)
+                {
+                    frameworkElement.Width = e.NewSize.Width;
+                    frameworkElement.Height = e.NewSize.Height-30;
+                }
+            }
+
 
         }
 

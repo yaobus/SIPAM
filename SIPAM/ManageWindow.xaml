@@ -5,15 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SIPAM"
         xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:managePage="clr-namespace:SIPAM.ManagePage"
         mc:Ignorable="d"
         Foreground="Teal"
         FontFamily="SimSun"
-        MinHeight="768"
-        MinWidth="1366"
+        Height="1080"
+        Width="1920"
+
+        MinWidth="1280"
+        MinHeight="720"
+
         FontSize="20"
         WindowStartupLocation="CenterScreen"
         WindowStyle="ThreeDBorderWindow"
-        WindowState="Maximized"
+        
         ResizeMode="CanResize"
         Title="SIPAM-简单IP地址分配管理系统-管理端"
         MouseDown="Window_MouseDown"
@@ -21,7 +26,16 @@
         SizeChanged="Window_SizeChanged"
         >
 
-    <Grid>
+    <Window.Resources>
+
+        <Style x:Key="AddressManageStyle" TargetType="managePage:AddressManage">
+            <Setter Property="Width" Value="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=WrapPanel}}"/>
+            <Setter Property="Height" Value="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=WrapPanel}}"/>
+        </Style>
+
+    </Window.Resources>
+
+<Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="129*"/>
             <ColumnDefinition Width="1237*"/>

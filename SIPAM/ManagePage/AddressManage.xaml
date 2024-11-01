@@ -8,21 +8,23 @@
              mc:Ignorable="d" 
              d:Background="AliceBlue"
              FontSize="20"
-             d:DesignHeight="1000" d:DesignWidth="1400"
-             d:VerticalAlignment="Stretch" 
              SizeChanged="UserControl_SizeChanged"
              Loaded="AddressManage_OnLoaded"
              >
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="300"/>
-            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+<Grid.RowDefinitions>
+<RowDefinition Height="*"/>
+<RowDefinition Height="60"/>
 
-        <!--纵向分隔条-->
+</Grid.RowDefinitions>
+       
         <DockPanel
-            
+            Grid.Column="0"
             Grid.Row="0"
             HorizontalAlignment="Right"
             >
@@ -38,9 +40,9 @@
 
         </DockPanel>
 
-        <!--纵向分隔条2-->
+        
         <DockPanel
-            
+            Grid.Row="0"
             Grid.Column="1"
             HorizontalAlignment="Right"
             >
@@ -56,26 +58,30 @@
 
         </DockPanel>
 
-        <!--地址列表-->
+       
 
-        <StackPanel
-            Grid.Column="1"
-            Margin="0"
-            >
+
 
             <GroupBox
+                Grid.Column="1"
+                    Grid.Row="0"
                     Header="IP网段列表"
                     BorderThickness="0"
                     Foreground="Teal"
                     Margin="0">
+                <ScrollViewer 
+                    
+                    HorizontalScrollBarVisibility="Disabled"
+                    VerticalScrollBarVisibility="Auto"
+                    >
+
                 <ListView
                     Margin="0"
                     x:Name="AddressListView"
                     BorderThickness="0"
                     SelectionChanged="AddressListView_SelectionChanged"
-                    HorizontalAlignment="Stretch"
-                    
-                    ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+
+
                     >
                     <ListView.View>
                         <GridView>
@@ -136,18 +142,21 @@
                     </ListView.View>
                 </ListView>
 
-            </GroupBox>
+
+
+            </ScrollViewer>
+        </GroupBox>
 
 
 
 
 
-        </StackPanel>
 
 
 
         <!--地址管理-->
         <StackPanel 
+            Grid.Row="0"
             Grid.Column="0"
             Margin="0"
             >
@@ -156,10 +165,14 @@
                     BorderThickness="0"
                     Foreground="Teal"
                     Margin="0">
-                <StackPanel Margin="0" VerticalAlignment="Top">
 
 
-                    <TextBox
+
+                    <WrapPanel Margin="0" VerticalAlignment="Top" >
+
+
+                        <TextBox
+                            Width="280"
                         x:Name="IpTextBox"
                         Margin="0,5,0,5"
                         Text="192.168.0.1"
@@ -171,7 +184,8 @@
                         TextChanged="IpTextBox_OnTextChanged"
                         TextWrapping="NoWrap" />
 
-                    <TextBox
+                        <TextBox
+                            Width="280"
                         x:Name="MaskText"  
                         Margin="0,5,0,5"
                         Text="255.255.255.0"
@@ -183,8 +197,8 @@
                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
                         TextWrapping="NoWrap" />
 
-                    <TextBox
-                            
+                        <TextBox
+                            Width="280"
                         x:Name="NumBox" 
                         Margin="0,5,0,5"
                         Text="256"
@@ -199,7 +213,7 @@
 
 
 
-                </StackPanel>
+                    </WrapPanel>
 
 
             </GroupBox>
@@ -218,7 +232,7 @@
                     Minimum="24"
                     Maximum="30"
                     IsEnabled="False"
-                    Style="{StaticResource MaterialDesignDiscreteSlider}"
+                    
                     TickFrequency="{Binding DiscreteHorizontal.TickFrequency}"
                     TickPlacement="Both"  
                     ValueChanged="MaskSlider_ValueChanged" />
@@ -227,7 +241,7 @@
 
     <Expander
         Margin="5"
-        IsExpanded="True"
+        IsExpanded="False"
         HorizontalAlignment="Stretch"
         Header="网段注意事项"
         Style="{StaticResource MaterialDesignExpander}"
@@ -310,6 +324,7 @@ Margin="5"
 
 
                     <TextBox
+                       
                         x:Name="LockedIp"
                         Margin="0,5,0,5"
                         VerticalAlignment="Top"
@@ -460,12 +475,10 @@ Margin="5"
 
 
         <!--图形化-->
-        <Grid
-            Grid.Column="2"
-            HorizontalAlignment="Stretch"
-            >
+
 
             <GroupBox 
+                Grid.Column="2"
                Header="当前子网信息图示"  
                BorderThickness="0"
                
@@ -593,12 +606,17 @@ Margin="5"
 
 
 
+                    <ScrollViewer 
+                        Grid.Row="1"
+                        x:Name="GraphicalPlan"
+                        HorizontalScrollBarVisibility="Disabled"
+                        VerticalScrollBarVisibility="Auto">
 
 
                     <!--图形化区域-->
                     <WrapPanel
                         x:Name="GraphicsPlan"
-                        Grid.Row="1"
+
                         Margin="0"
                         
                         >
@@ -606,13 +624,13 @@ Margin="5"
 
                     </WrapPanel>
 
-
+                    </ScrollViewer>
                 </Grid>
 
             </GroupBox>
 
 
-        </Grid>
+
 
 
 
